@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="frycz_pcdbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="computer">
+          <Key>
+            <PropertyRef Name="idcomputer" />
+          </Key>
+          <Property Name="idcomputer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+          <Property Name="bpcs_sessions" Type="varchar" MaxLength="45" />
+          <Property Name="mac_address" Type="varchar" MaxLength="45" />
+          <Property Name="serial_number" Type="varchar" MaxLength="45" />
+          <Property Name="inventory_number" Type="varchar" MaxLength="45" />
+          <Property Name="create_time" Type="datetime" Precision="0" />
+          <Property Name="last_update_time" Type="datetime" Precision="0" />
+          <Property Name="comment" Type="varchar" MaxLength="100" />
+          <Property Name="guarantee" Type="datetime" Precision="0" />
+          <Property Name="idos" Type="int" />
+          <Property Name="idcomputer_brand" Type="int" />
+          <Property Name="idcomputer_type" Type="int" />
+          <Property Name="idcomputer_parameters" Type="int" />
+          <Property Name="iddiscarded_info" Type="int" />
+          <Property Name="iduser" Type="int" />
+        </EntityType>
+        <EntityType Name="computer_parameters">
+          <Key>
+            <PropertyRef Name="idcomputer_parameters" />
+          </Key>
+          <Property Name="idcomputer_parameters" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="processor" Type="varchar" MaxLength="100" />
+          <Property Name="ram" Type="decimal" Precision="20" Scale="0" />
+          <Property Name="hdd" Type="int" />
+          <Property Name="optical_disc_drive" Type="bool" />
+          <Property Name="external_gpu" Type="bool" />
+        </EntityType>
+        <EntityType Name="computer_type">
+          <Key>
+            <PropertyRef Name="idcomputer_type" />
+          </Key>
+          <Property Name="idcomputer_type" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="cumputer_brand">
+          <Key>
+            <PropertyRef Name="idcumputer_brand" />
+          </Key>
+          <Property Name="idcumputer_brand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="maker" Type="varchar" MaxLength="45" />
+          <Property Name="model" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="iddepartment" />
+          </Key>
+          <Property Name="iddepartment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="number" Type="int" />
+        </EntityType>
+        <EntityType Name="discarded_info">
+          <Key>
+            <PropertyRef Name="iddiscarded_info" />
+          </Key>
+          <Property Name="iddiscarded_info" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" />
+          <Property Name="iduser" Type="int" />
+        </EntityType>
+        <EntityType Name="logging">
+          <Key>
+            <PropertyRef Name="idlogging" />
+          </Key>
+          <Property Name="idlogging" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="info" Type="varchar" MaxLength="100" />
+          <Property Name="time" Type="datetime" Precision="0" />
+          <Property Name="idregistered_user" Type="int" />
+        </EntityType>
+        <EntityType Name="os">
+          <Key>
+            <PropertyRef Name="idos" />
+          </Key>
+          <Property Name="idos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="version" Type="int" />
+        </EntityType>
+        <EntityType Name="registered_user">
+          <Key>
+            <PropertyRef Name="idregistered_user" />
+          </Key>
+          <Property Name="idregistered_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="45" />
+          <Property Name="password" Type="varchar" MaxLength="100" />
+          <Property Name="last_login" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="100" />
+          <Property Name="lastname" Type="varchar" MaxLength="100" />
+          <Property Name="iddepartment" Type="int" />
+        </EntityType>
+        <Association Name="idcomputee_brand">
+          <End Role="cumputer_brand" Type="Self.cumputer_brand" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cumputer_brand">
+              <PropertyRef Name="idcumputer_brand" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idcomputer_brand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idcomputer_parameters">
+          <End Role="computer_parameters" Type="Self.computer_parameters" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="computer_parameters">
+              <PropertyRef Name="idcomputer_parameters" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idcomputer_parameters" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idcomputer_type">
+          <End Role="computer_type" Type="Self.computer_type" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="computer_type">
+              <PropertyRef Name="idcomputer_type" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idcomputer_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iddepartment">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="iddepartment" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="iddepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iddiscarded_info">
+          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discarded_info">
+              <PropertyRef Name="iddiscarded_info" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="iddiscarded_info" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idos">
+          <End Role="os" Type="Self.os" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="os">
+              <PropertyRef Name="idos" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idregistered_user">
+          <End Role="registered_user" Type="Self.registered_user" Multiplicity="0..1" />
+          <End Role="logging" Type="Self.logging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registered_user">
+              <PropertyRef Name="idregistered_user" />
+            </Principal>
+            <Dependent Role="logging">
+              <PropertyRef Name="idregistered_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iduser">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="discarded_info">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idusers">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="frycz_pcdbModelStoreContainer">
+          <EntitySet Name="computer" EntityType="Self.computer" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="computer_parameters" EntityType="Self.computer_parameters" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="computer_type" EntityType="Self.computer_type" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="cumputer_brand" EntityType="Self.cumputer_brand" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="department" EntityType="Self.department" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="discarded_info" EntityType="Self.discarded_info" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="logging" EntityType="Self.logging" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="os" EntityType="Self.os" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="registered_user" EntityType="Self.registered_user" Schema="frycz_pcdb" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="frycz_pcdb" store:Type="Tables" />
+          <AssociationSet Name="idcomputee_brand" Association="Self.idcomputee_brand">
+            <End Role="cumputer_brand" EntitySet="cumputer_brand" />
+            <End Role="computer" EntitySet="computer" />
+          </AssociationSet>
+          <AssociationSet Name="idcomputer_parameters" Association="Self.idcomputer_parameters">
+            <End Role="computer_parameters" EntitySet="computer_parameters" />
+            <End Role="computer" EntitySet="computer" />
+          </AssociationSet>
+          <AssociationSet Name="idcomputer_type" Association="Self.idcomputer_type">
+            <End Role="computer_type" EntitySet="computer_type" />
+            <End Role="computer" EntitySet="computer" />
+          </AssociationSet>
+          <AssociationSet Name="iddepartment" Association="Self.iddepartment">
+            <End Role="department" EntitySet="department" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <AssociationSet Name="iddiscarded_info" Association="Self.iddiscarded_info">
+            <End Role="discarded_info" EntitySet="discarded_info" />
+            <End Role="computer" EntitySet="computer" />
+          </AssociationSet>
+          <AssociationSet Name="idos" Association="Self.idos">
+            <End Role="os" EntitySet="os" />
+            <End Role="computer" EntitySet="computer" />
+          </AssociationSet>
+          <AssociationSet Name="idregistered_user" Association="Self.idregistered_user">
+            <End Role="registered_user" EntitySet="registered_user" />
+            <End Role="logging" EntitySet="logging" />
+          </AssociationSet>
+          <AssociationSet Name="iduser" Association="Self.iduser">
+            <End Role="user" EntitySet="user" />
+            <End Role="discarded_info" EntitySet="discarded_info" />
+          </AssociationSet>
+          <AssociationSet Name="idusers" Association="Self.idusers">
+            <End Role="user" EntitySet="user" />
+            <End Role="computer" EntitySet="computer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="frycz_pcdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="computer">
+          <Key>
+            <PropertyRef Name="idcomputer" />
+          </Key>
+          <Property Name="idcomputer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="bpcs_sessions" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="mac_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="serial_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="inventory_number" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_time" Type="DateTime" />
+          <Property Name="last_update_time" Type="DateTime" />
+          <Property Name="comment" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="guarantee" Type="DateTime" />
+          <Property Name="idos" Type="Int32" />
+          <Property Name="idcomputer_brand" Type="Int32" />
+          <Property Name="idcomputer_type" Type="Int32" />
+          <Property Name="idcomputer_parameters" Type="Int32" />
+          <Property Name="iddiscarded_info" Type="Int32" />
+          <Property Name="iduser" Type="Int32" />
+          <NavigationProperty Name="cumputer_brand" Relationship="Self.idcomputee_brand" FromRole="computer" ToRole="cumputer_brand" />
+          <NavigationProperty Name="computer_parameters" Relationship="Self.idcomputer_parameters" FromRole="computer" ToRole="computer_parameters" />
+          <NavigationProperty Name="computer_type" Relationship="Self.idcomputer_type" FromRole="computer" ToRole="computer_type" />
+          <NavigationProperty Name="discarded_info" Relationship="Self.iddiscarded_info" FromRole="computer" ToRole="discarded_info" />
+          <NavigationProperty Name="o" Relationship="Self.idos" FromRole="computer" ToRole="os" />
+          <NavigationProperty Name="user" Relationship="Self.idusers" FromRole="computer" ToRole="user" />
+        </EntityType>
+        <EntityType Name="computer_parameters">
+          <Key>
+            <PropertyRef Name="idcomputer_parameters" />
+          </Key>
+          <Property Name="idcomputer_parameters" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="processor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ram" Type="Decimal" />
+          <Property Name="hdd" Type="Int32" />
+          <Property Name="optical_disc_drive" Type="Boolean" />
+          <Property Name="external_gpu" Type="Boolean" />
+          <NavigationProperty Name="computers" Relationship="Self.idcomputer_parameters" FromRole="computer_parameters" ToRole="computer" />
+        </EntityType>
+        <EntityType Name="computer_type">
+          <Key>
+            <PropertyRef Name="idcomputer_type" />
+          </Key>
+          <Property Name="idcomputer_type" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="computers" Relationship="Self.idcomputer_type" FromRole="computer_type" ToRole="computer" />
+        </EntityType>
+        <EntityType Name="cumputer_brand">
+          <Key>
+            <PropertyRef Name="idcumputer_brand" />
+          </Key>
+          <Property Name="idcumputer_brand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="maker" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="model" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="computers" Relationship="Self.idcomputee_brand" FromRole="cumputer_brand" ToRole="computer" />
+        </EntityType>
+        <EntityType Name="department">
+          <Key>
+            <PropertyRef Name="iddepartment" />
+          </Key>
+          <Property Name="iddepartment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="Int32" />
+          <NavigationProperty Name="users" Relationship="Self.iddepartment" FromRole="department" ToRole="user" />
+        </EntityType>
+        <EntityType Name="discarded_info">
+          <Key>
+            <PropertyRef Name="iddiscarded_info" />
+          </Key>
+          <Property Name="iddiscarded_info" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" />
+          <Property Name="iduser" Type="Int32" />
+          <NavigationProperty Name="computers" Relationship="Self.iddiscarded_info" FromRole="discarded_info" ToRole="computer" />
+          <NavigationProperty Name="user" Relationship="Self.iduser" FromRole="discarded_info" ToRole="user" />
+        </EntityType>
+        <EntityType Name="logging">
+          <Key>
+            <PropertyRef Name="idlogging" />
+          </Key>
+          <Property Name="idlogging" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="info" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="DateTime" />
+          <Property Name="idregistered_user" Type="Int32" />
+          <NavigationProperty Name="registered_user" Relationship="Self.idregistered_user" FromRole="logging" ToRole="registered_user" />
+        </EntityType>
+        <EntityType Name="o">
+          <Key>
+            <PropertyRef Name="idos" />
+          </Key>
+          <Property Name="idos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="version" Type="Int32" />
+          <NavigationProperty Name="computers" Relationship="Self.idos" FromRole="os" ToRole="computer" />
+        </EntityType>
+        <EntityType Name="registered_user">
+          <Key>
+            <PropertyRef Name="idregistered_user" />
+          </Key>
+          <Property Name="idregistered_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="last_login" Type="DateTime" />
+          <NavigationProperty Name="loggings" Relationship="Self.idregistered_user" FromRole="registered_user" ToRole="logging" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="iduser" />
+          </Key>
+          <Property Name="iduser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="iddepartment" Type="Int32" />
+          <NavigationProperty Name="computers" Relationship="Self.idusers" FromRole="user" ToRole="computer" />
+          <NavigationProperty Name="department" Relationship="Self.iddepartment" FromRole="user" ToRole="department" />
+          <NavigationProperty Name="discarded_info" Relationship="Self.iduser" FromRole="user" ToRole="discarded_info" />
+        </EntityType>
+        <Association Name="idcomputee_brand">
+          <End Role="cumputer_brand" Type="Self.cumputer_brand" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cumputer_brand">
+              <PropertyRef Name="idcumputer_brand" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idcomputer_brand" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idcomputer_parameters">
+          <End Role="computer_parameters" Type="Self.computer_parameters" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="computer_parameters">
+              <PropertyRef Name="idcomputer_parameters" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idcomputer_parameters" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idcomputer_type">
+          <End Role="computer_type" Type="Self.computer_type" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="computer_type">
+              <PropertyRef Name="idcomputer_type" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idcomputer_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iddiscarded_info">
+          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="discarded_info">
+              <PropertyRef Name="iddiscarded_info" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="iddiscarded_info" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idos">
+          <End Role="os" Type="Self.o" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="os">
+              <PropertyRef Name="idos" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="idos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idusers">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="computer" Type="Self.computer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="computer">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iddepartment">
+          <End Role="department" Type="Self.department" Multiplicity="0..1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="iddepartment" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="iddepartment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="iduser">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="iduser" />
+            </Principal>
+            <Dependent Role="discarded_info">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="idregistered_user">
+          <End Role="registered_user" Type="Self.registered_user" Multiplicity="0..1" />
+          <End Role="logging" Type="Self.logging" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registered_user">
+              <PropertyRef Name="idregistered_user" />
+            </Principal>
+            <Dependent Role="logging">
+              <PropertyRef Name="idregistered_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="frycz_pcdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="computers" EntityType="Self.computer" />
+          <EntitySet Name="computer_parameters" EntityType="Self.computer_parameters" />
+          <EntitySet Name="computer_type" EntityType="Self.computer_type" />
+          <EntitySet Name="cumputer_brand" EntityType="Self.cumputer_brand" />
+          <EntitySet Name="departments" EntityType="Self.department" />
+          <EntitySet Name="discarded_info" EntityType="Self.discarded_info" />
+          <EntitySet Name="loggings" EntityType="Self.logging" />
+          <EntitySet Name="os" EntityType="Self.o" />
+          <EntitySet Name="registered_user" EntityType="Self.registered_user" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="idcomputee_brand" Association="Self.idcomputee_brand">
+            <End Role="cumputer_brand" EntitySet="cumputer_brand" />
+            <End Role="computer" EntitySet="computers" />
+          </AssociationSet>
+          <AssociationSet Name="idcomputer_parameters" Association="Self.idcomputer_parameters">
+            <End Role="computer_parameters" EntitySet="computer_parameters" />
+            <End Role="computer" EntitySet="computers" />
+          </AssociationSet>
+          <AssociationSet Name="idcomputer_type" Association="Self.idcomputer_type">
+            <End Role="computer_type" EntitySet="computer_type" />
+            <End Role="computer" EntitySet="computers" />
+          </AssociationSet>
+          <AssociationSet Name="iddiscarded_info" Association="Self.iddiscarded_info">
+            <End Role="discarded_info" EntitySet="discarded_info" />
+            <End Role="computer" EntitySet="computers" />
+          </AssociationSet>
+          <AssociationSet Name="idos" Association="Self.idos">
+            <End Role="os" EntitySet="os" />
+            <End Role="computer" EntitySet="computers" />
+          </AssociationSet>
+          <AssociationSet Name="idusers" Association="Self.idusers">
+            <End Role="user" EntitySet="users" />
+            <End Role="computer" EntitySet="computers" />
+          </AssociationSet>
+          <AssociationSet Name="iddepartment" Association="Self.iddepartment">
+            <End Role="department" EntitySet="departments" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="iduser" Association="Self.iduser">
+            <End Role="user" EntitySet="users" />
+            <End Role="discarded_info" EntitySet="discarded_info" />
+          </AssociationSet>
+          <AssociationSet Name="idregistered_user" Association="Self.idregistered_user">
+            <End Role="registered_user" EntitySet="registered_user" />
+            <End Role="logging" EntitySet="loggings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="frycz_pcdbModelStoreContainer" CdmEntityContainer="frycz_pcdbEntities">
+          <EntitySetMapping Name="computers">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.computer">
+              <MappingFragment StoreEntitySet="computer">
+                <ScalarProperty Name="idcomputer" ColumnName="idcomputer" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="bpcs_sessions" ColumnName="bpcs_sessions" />
+                <ScalarProperty Name="mac_address" ColumnName="mac_address" />
+                <ScalarProperty Name="serial_number" ColumnName="serial_number" />
+                <ScalarProperty Name="inventory_number" ColumnName="inventory_number" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="last_update_time" ColumnName="last_update_time" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="guarantee" ColumnName="guarantee" />
+                <ScalarProperty Name="idos" ColumnName="idos" />
+                <ScalarProperty Name="idcomputer_brand" ColumnName="idcomputer_brand" />
+                <ScalarProperty Name="idcomputer_type" ColumnName="idcomputer_type" />
+                <ScalarProperty Name="idcomputer_parameters" ColumnName="idcomputer_parameters" />
+                <ScalarProperty Name="iddiscarded_info" ColumnName="iddiscarded_info" />
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="computer_parameters">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.computer_parameters">
+              <MappingFragment StoreEntitySet="computer_parameters">
+                <ScalarProperty Name="idcomputer_parameters" ColumnName="idcomputer_parameters" />
+                <ScalarProperty Name="processor" ColumnName="processor" />
+                <ScalarProperty Name="ram" ColumnName="ram" />
+                <ScalarProperty Name="hdd" ColumnName="hdd" />
+                <ScalarProperty Name="optical_disc_drive" ColumnName="optical_disc_drive" />
+                <ScalarProperty Name="external_gpu" ColumnName="external_gpu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="computer_type">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.computer_type">
+              <MappingFragment StoreEntitySet="computer_type">
+                <ScalarProperty Name="idcomputer_type" ColumnName="idcomputer_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cumputer_brand">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.cumputer_brand">
+              <MappingFragment StoreEntitySet="cumputer_brand">
+                <ScalarProperty Name="idcumputer_brand" ColumnName="idcumputer_brand" />
+                <ScalarProperty Name="maker" ColumnName="maker" />
+                <ScalarProperty Name="model" ColumnName="model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departments">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.department">
+              <MappingFragment StoreEntitySet="department">
+                <ScalarProperty Name="iddepartment" ColumnName="iddepartment" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="number" ColumnName="number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="discarded_info">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.discarded_info">
+              <MappingFragment StoreEntitySet="discarded_info">
+                <ScalarProperty Name="iddiscarded_info" ColumnName="iddiscarded_info" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="loggings">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.logging">
+              <MappingFragment StoreEntitySet="logging">
+                <ScalarProperty Name="idlogging" ColumnName="idlogging" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="idregistered_user" ColumnName="idregistered_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="os">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.o">
+              <MappingFragment StoreEntitySet="os">
+                <ScalarProperty Name="idos" ColumnName="idos" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="version" ColumnName="version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registered_user">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.registered_user">
+              <MappingFragment StoreEntitySet="registered_user">
+                <ScalarProperty Name="idregistered_user" ColumnName="idregistered_user" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="last_login" ColumnName="last_login" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="frycz_pcdbModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="iddepartment" ColumnName="iddepartment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
