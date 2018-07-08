@@ -29,37 +29,40 @@
 </head>
 
 <body>
+<header>
+<button id="homebutton" class="btn btn-lg btn-primary btn-block" onclick="location.href='@Url.Action("Index", "Home")'"><span class="glyphicon glyphicon-home"></span></button>
+</header>
+@using (Html.BeginForm("Singin", "Login", FormMethod.Post, new {@class = "form-signin"}))
+{
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Application - Sign in</h1>
+        <p>This is only for IT administrators. Unprofessional data manipulation can cause unexpected application behavior.</p>.
+    </div>
 
+    <div class="form-label-group">
+        <input type="text" id="inputEmail" class="form-control" name="login" placeholder="Login" required autofocus>
+    </div>
 
-    @using (Html.BeginForm("Singin", "Login", FormMethod.Post, new { @class = "form-signin" }))
+    <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
+    </div>
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me" name="remember"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block">Sign in</button>
+    <br/>
+    if (TempData["error"] != null)
     {
-        <div class="text-center mb-4">
-            <h1 class="h3 mb-3 font-weight-normal">Database - Sing in</h1>
-            <p>This is only for IT administrators. Unprofessional data manipulation can cause unexpected application behavior.</p>.
+        <div class="alert alert-danger" role="alert">
+            @TempData["error"]
         </div>
-
-        <div class="form-label-group">
-            <input type="text" id="inputEmail" class="form-control" name="login" placeholder="Login" required autofocus>
-            <label for="inputEmail">Login</label>
-        </div>
-
-        <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
-            <label for="inputPassword">Password</label>
-        </div>
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me" name="remember"> Remember me
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block">Sign in</button>
-       if (TempData["error"] != null)
-        {
-            <div class="alert alert-danger" role="alert">
-                @TempData["error"]
-            </div>
-        }
     }
+
+}
+
+
 </body>
 </html>

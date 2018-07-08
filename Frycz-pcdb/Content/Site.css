@@ -118,3 +118,6 @@ form.example::after {
 #navImage {
     position: absolute;
 }
+tr:hover {
+    cursor: pointer;
+}

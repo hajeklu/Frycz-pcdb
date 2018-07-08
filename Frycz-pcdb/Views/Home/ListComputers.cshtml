@@ -12,23 +12,35 @@
             @Html.DisplayNameFor(model => model.name)
         </th>
         <th scope="col">
+            @Html.DisplayNameFor(model => model.user.lastname)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.user.firstname)
+        </th>
+        <th scope="col">
             @Html.DisplayNameFor(model => model.comment)
         </th>
         <th  scope="col">
-            @Html.DisplayNameFor(model => model.idcomputer_type)
+            @Html.DisplayNameFor(model => model.computer_type.name)
         </th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr onclick="document.location = '@Url.Action("Index", "ComputerDetail", item)';">
         <td>
             @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.firstname)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.comment)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.idcomputer_type)
+            @Html.DisplayFor(modelItem => item.computer_type.name)
         </td>
     </tr>
 }

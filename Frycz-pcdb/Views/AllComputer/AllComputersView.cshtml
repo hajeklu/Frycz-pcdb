@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Frycz_pcdb.computer>
+
+@{
+    ViewBag.Title = "AllComputersView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AllComputersView</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mac_address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.serial_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.inventory_number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.create_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.last_update_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.guarantee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cumputer_brand.maker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.computer_parameters.processor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.computer_type.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.discarded_info.iddiscarded_info)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.o.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.firstname)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class='clickable-row' data-href='https://www.google.com/'>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mac_address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.serial_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.inventory_number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.create_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.last_update_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.guarantee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cumputer_brand.maker)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.computer_parameters.processor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.computer_type.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.discarded_info.iddiscarded_info)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.o.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bpcs_sessions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idcomputer }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idcomputer }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idcomputer })
+        </td>
+    </tr>
+}
+
+</table>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+
+</script>

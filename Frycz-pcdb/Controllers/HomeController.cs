@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -26,15 +27,24 @@ namespace Frycz_pcdb.Controllers
             
             if (searchText.Length < 3)
                 return View("ListComputers", new List<computer>());
+
+
             string searchTextUpper = searchText.ToUpper();
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 var pc = from computer in entities.computers
                     where computer.name.Contains(searchTextUpper)
                     select computer;
+                pc = pc.Include(m => m.user);
+                pc = pc.Include(m => m.computer_type);
+
+                List<computer> computersList = pc.ToList();
+
+                if (computersList.Count == 1)
+                    return RedirectToAction("Index","ComputerDetail" ,computersList.FirstOrDefault());
+
                 return View("ListComputers",pc.ToArray());
             }
-            return null;
         }
 
         public void Logout()

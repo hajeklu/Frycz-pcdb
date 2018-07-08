@@ -1,0 +1,143 @@
+﻿@model Frycz_pcdb.computer
+
+@{
+    ViewBag.Title = "ComputerDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ComputerDetail</h2>
+
+<div>
+    <h4>computer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name):
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mac_address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mac_address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.serial_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.serial_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inventory_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inventory_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.create_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.create_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.last_update_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.last_update_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.guarantee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.guarantee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cumputer_brand.maker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cumputer_brand.maker)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.computer_parameters.processor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.computer_parameters.processor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.computer_type.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.computer_type.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.discarded_info.iddiscarded_info)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discarded_info.iddiscarded_info)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.o.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.o.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.firstname)
+        </dd>
+
+    </dl>
+</div>

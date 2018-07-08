@@ -186,6 +186,8 @@
     <Compile Include="computer_type.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AllComputerController.cs" />
+    <Compile Include="Controllers\ComputerDetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="cumputer_brand.cs">
@@ -290,6 +292,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\ListComputers.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\AllComputer\AllComputersView.cshtml" />
+    <Content Include="Views\ComputerDetail\ComputerDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
