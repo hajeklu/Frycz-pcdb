@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ComputerDetail</h2>
+<h2 class="modal-title">ComputerDetail</h2>
 
 <div>
     <h4>computer</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name):
+            @Html.DisplayNameFor(model => model.name)
         </dt>
 
         <dd>
@@ -33,6 +33,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.user.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.computer_brand.model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.computer_brand.model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.computer_brand.maker)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.computer_brand.maker)
         </dd>
 
         <dt>
@@ -84,6 +100,14 @@
         </dd>
 
         <dt>
+            @Html.DisplayNameFor(model => model.bpcs_sessions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bpcs_sessions)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.guarantee)
         </dt>
 
@@ -92,19 +116,26 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cumputer_brand.maker)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cumputer_brand.maker)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.computer_parameters.processor)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.computer_parameters.processor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.computer_parameters.ram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.computer_parameters.ram) GB
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.computer_parameters.hdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.computer_parameters.hdd) GB
         </dd>
 
         <dt>
@@ -116,11 +147,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.discarded_info.iddiscarded_info)
+            @Html.DisplayNameFor(model => model.discarded_info.date)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.discarded_info.iddiscarded_info)
+            @Html.DisplayFor(model => model.discarded_info.date)
         </dd>
 
         <dt>
@@ -132,12 +163,14 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.user.firstname)
+            @Html.DisplayNameFor(model => model.o.version)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.user.firstname)
+            @Html.DisplayFor(model => model.o.version)
         </dd>
 
     </dl>
+    <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", Model)'" class="btn btn-warning"><span class="
+glyphicon glyphicon-edit"></span>   Edit</button>
 </div>

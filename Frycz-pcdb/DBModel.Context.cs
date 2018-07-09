@@ -28,12 +28,12 @@ namespace Frycz_pcdb
         public virtual DbSet<computer> computers { get; set; }
         public virtual DbSet<computer_parameters> computer_parameters { get; set; }
         public virtual DbSet<computer_type> computer_type { get; set; }
-        public virtual DbSet<cumputer_brand> cumputer_brand { get; set; }
         public virtual DbSet<department> departments { get; set; }
         public virtual DbSet<discarded_info> discarded_info { get; set; }
         public virtual DbSet<logging> loggings { get; set; }
         public virtual DbSet<o> os { get; set; }
         public virtual DbSet<registered_user> registered_user { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<computer_brand> computer_brand { get; set; }
     }
 }

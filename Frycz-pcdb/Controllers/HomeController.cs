@@ -13,10 +13,6 @@ namespace Frycz_pcdb.Controllers
     {
         public ActionResult Index()
         {
-            if (User.Identity.Name != null && !User.Identity.Name.Equals(""))
-            {
-                ViewBag.name = User.Identity.Name;
-            }
 
             return View();
         }

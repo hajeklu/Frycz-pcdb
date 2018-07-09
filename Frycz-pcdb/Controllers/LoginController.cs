@@ -29,13 +29,14 @@ namespace Frycz_pcdb.Controllers
                 using (var dc = new frycz_pcdbEntities())
                 {
                     registered_user user = dc.registered_user.FirstOrDefault(u => u.login.Equals(login));
-                    var myCookie = new HttpCookie("myCookie");
+              //      var myCookie = new HttpCookie("myCookie");
                     user.last_login = DateTime.Now;
                     dc.SaveChanges();
-                    myCookie.Values.Add("id", user.idregistered_user.ToString());
+              /*      myCookie.Values.Add("id", user.idregistered_user.ToString());
                     Response.Cookies.Add(myCookie);
-                    FormsAuthentication.SetAuthCookie(login, remem);
-                    
+            */        FormsAuthentication.SetAuthCookie(login, remem);
+                    Session["user"] = user.login;
+
                 }
                 return RedirectToAction("Index", "Home");
             }

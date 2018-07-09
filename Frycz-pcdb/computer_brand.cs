@@ -12,10 +12,10 @@ namespace Frycz_pcdb
     using System;
     using System.Collections.Generic;
     
-    public partial class cumputer_brand
+    public partial class computer_brand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cumputer_brand()
+        public computer_brand()
         {
             this.computers = new HashSet<computer>();
         }

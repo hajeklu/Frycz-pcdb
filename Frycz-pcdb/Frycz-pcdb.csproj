@@ -180,6 +180,10 @@
     <Compile Include="computer.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="computer_brand.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAnnotations\computerP.cs" />
     <Compile Include="computer_parameters.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -188,11 +192,15 @@
     </Compile>
     <Compile Include="Controllers\AllComputerController.cs" />
     <Compile Include="Controllers\ComputerDetailController.cs" />
+    <Compile Include="Controllers\EditComputerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="cumputer_brand.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="DataAnnotations\computer_brandP.cs" />
+    <Compile Include="DataAnnotations\computer_parametersP.cs" />
+    <Compile Include="DataAnnotations\computer_typeP.cs" />
+    <Compile Include="DataAnnotations\discarded_infoP.cs" />
+    <Compile Include="DataAnnotations\oP.cs" />
+    <Compile Include="DataAnnotations\userP.cs" />
     <Compile Include="DBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -294,6 +302,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\AllComputer\AllComputersView.cshtml" />
     <Content Include="Views\ComputerDetail\ComputerDetail.cshtml" />
+    <Content Include="Views\EditComputer\EditComputer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

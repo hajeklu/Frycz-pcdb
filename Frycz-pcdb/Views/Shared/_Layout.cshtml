@@ -6,8 +6,12 @@
     <title>@ViewBag.Title - Frydlant</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link rel="shortcut icon" type="image/x-icon" href=~/images/zf_logo.jpg />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+
 
 
 </head>
@@ -23,9 +27,9 @@
             <ul class="nav navbar-nav"></ul>
             <ul class="nav navbar-nav navbar-right">
 
-                @if (ViewBag.name != null)
+                @if (User.Identity.Name != null && !User.Identity.Name.Equals(""))
                 {
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> User: <b>@ViewBag.name </b></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> User: <b>@User.Identity.Name</b></a></li>
                     <li><a href='@Url.Action("Logout", "Home")' onclick="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
                 }
                 else

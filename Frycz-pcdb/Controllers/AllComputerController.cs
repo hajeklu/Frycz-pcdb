@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.ApplicationInsights.Web;
 
 namespace Frycz_pcdb.Controllers
 {
@@ -14,10 +15,9 @@ namespace Frycz_pcdb.Controllers
         {
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
-                var pc = from computer in entities.computers
-                    select computer;
-                pc = pc.Include(m => m.user);
-                return View("AllComputersView", pc.ToArray());
+                entities.Configuration.LazyLoadingEnabled = false;
+                var comps = entities.computers.Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.computer_type).ToList();
+                return View("AllComputersView",comps);
             }
         }
     }
