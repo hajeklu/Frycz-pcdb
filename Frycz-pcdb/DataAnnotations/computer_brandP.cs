@@ -19,4 +19,14 @@ namespace Frycz_pcdb
             public string model { get; set; }
         }
     }
+
+    public partial class computer_brand
+    {
+        [Display(Name = "Computer model: ")]
+        public string modelAndMaker
+        {
+            get { return model + " " + maker; }
+            set { modelAndMaker = value; }
+        }
+    }
 }

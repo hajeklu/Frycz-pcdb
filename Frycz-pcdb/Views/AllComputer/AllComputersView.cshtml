@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AllComputersView</h2>
+<h2 id="allCompH">Computers - all</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" id="addButton" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>    Add computers</button>
 </p>
 <table class="table">
     <tr>
@@ -31,25 +31,22 @@
             @Html.DisplayNameFor(model => model.inventory_number)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.create_time)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.last_update_time)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.guarantee)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.computer_brand.maker)
+            @Html.DisplayNameFor(model => model.computer_brand.model)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.computer_parameters.processor)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.computer_type.name)
+            @Html.DisplayNameFor(model => model.comment)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.discarded_info.iddiscarded_info)
+            @Html.DisplayNameFor(model => model.discarded_info.date)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.o.name)
@@ -58,56 +55,54 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr class='clickable-row' data-href='https://www.google.com/'>
-        <td>
+    <tr>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.name)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.user.firstname)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.user.lastname)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.mac_address)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.serial_number)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.inventory_number)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.create_time)
-        </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.last_update_time)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.guarantee)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.computer_brand.maker)
+        <td id="myRow">
+            @Html.DisplayFor(modelItem => item.computer_brand.model)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.computer_parameters.processor)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.computer_type.name)
+        <td id="myRow">
+            @Html.DisplayFor(modelItem => item.comment)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.discarded_info.iddiscarded_info)
+        <td id="myRow">
+            @Html.DisplayFor(modelItem => item.discarded_info.date) - @Html.DisplayFor(modelItem => item.discarded_info.user.fullname)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.o.name)
         </td>
-        <td>
+        <td id="myRow">
             @Html.DisplayFor(modelItem => item.bpcs_sessions)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idcomputer }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idcomputer }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idcomputer })
+        <td id="myRow">
+            <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", item)'" class="btn btn-warning"><span class="
+glyphicon glyphicon-pencil"></span>   Edit</button>
+            <button type="button" onclick="location.href = '@Url.Action("Index", "ComputerDetail", item)'" class="btn btn-info .btn-group-sm"><span class="
+glyphicon glyphicon-edit"></span>   Details</button>
         </td>
     </tr>
 }

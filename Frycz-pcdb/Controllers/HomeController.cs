@@ -53,7 +53,6 @@ namespace Frycz_pcdb.Controllers
             Response.Cache.SetNoStore();
             var cookie = Request.Cookies["myCookie"];
             FormsAuthentication.SignOut();
-            cookie.Values["id"] = null;
             Response.Redirect(Url.Action("Index", "Home"));
 
         }

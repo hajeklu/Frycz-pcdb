@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="modal-title">ComputerDetail</h2>
+<h2 class="modal-title">Computer Detail</h2>
 
 <div>
     <h4>computer</h4>
@@ -34,7 +34,6 @@
         <dd>
             @Html.DisplayFor(model => model.user.firstname)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.computer_brand.model)
         </dt>
@@ -74,7 +73,6 @@
         <dd>
             @Html.DisplayFor(model => model.inventory_number)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.create_time)
         </dt>
@@ -100,21 +98,12 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.bpcs_sessions)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.bpcs_sessions)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.guarantee)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.guarantee)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.computer_parameters.processor)
         </dt>
@@ -151,7 +140,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.discarded_info.date)
+            @Html.DisplayFor(model => model.discarded_info.date) @if (!Model.user.fullname.Equals("") && Model.user != null)
+                                                                 {
+                                                                     @Html.DisplayFor(model => model.discarded_info.user.fullname)
+                                                                 }
         </dd>
 
         <dt>
@@ -170,7 +162,16 @@
             @Html.DisplayFor(model => model.o.version)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.bpcs_sessions)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bpcs_sessions)
+        </dd>
+
+
     </dl>
     <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", Model)'" class="btn btn-warning"><span class="
-glyphicon glyphicon-edit"></span>   Edit</button>
+glyphicon glyphicon-pencil"></span>     Edit</button>
 </div>

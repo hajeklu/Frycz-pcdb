@@ -14,6 +14,7 @@ namespace Frycz_pcdb
             
             public int iddiscarded_info { get; set; }
             [Display(Name = "Date of discarded: ")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM.dd.yyyy HH:mm}")]
             public Nullable<System.DateTime> date { get; set; }
         }
     }

@@ -32,7 +32,7 @@ namespace Frycz_pcdb
             get
             {
                 return
-                    (firstname + " " + lastname);
+                    (lastname + " " + firstname);
             }
             set { fullname = value; }
         }

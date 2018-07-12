@@ -118,10 +118,13 @@ form.example::after {
 #navImage {
     position: absolute;
 }
-tr:hover {
-    cursor: pointer;
+.td {
+    vertical-align: middle;
 }
 
+#myRow {
+    vertical-align: middle;
+}
 
 
 /*--------------------------------------------------------*/
@@ -137,25 +140,28 @@ dt {
     font-weight: bold;
     color: #0079BC;
     border-bottom: 2px dotted #ccc;
+
 }
 dd {
     margin: 0 0 0 110px;
     padding: 0 0 0.5em 0;
-
    font-weight: bold;
 }
 
-#userInput {
+.userInput {
     width: 94%;
     display: inline-block;
-    margin-left: -4px;
+    margin-right: -4px;
     padding: 0px;
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px
-
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
 }
 
-#userInputButton {
+.userInputButton {
     height: 34px;
     width: 6%;
     padding: 0px;
@@ -169,6 +175,104 @@ dd {
 #hredit {
     margin-left: 1%;
     color: #000;
-    background-color: #000;
+    background-color: #C0C0C0;
     height: 1px;
+}
+
+footer {
+    background-color: #ffffff;
+}
+
+.ui-corner-all
+{
+    -moz-border-radius: 4px 4px 4px 4px;
+}
+.ui-widget-content {
+    border: 1px solid #848484;
+    color: black;
+        
+    font-size: 50px;
+    background-color: white
+}
+.ui-widget
+{
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 13px;
+}
+.ui-menu
+{
+    display: block;
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0px;
+}
+.ui-autocomplete
+{
+    cursor: pointer;
+    position: absolute;
+}
+    .ui-autocomplete :hover {
+        background-color: #2092FB;
+    }
+.ui-menu .ui-menu-item {
+    clear: left;
+    float: left;
+    margin: 0;
+    padding-top: 3px;
+    padding-right: 12px;
+    padding-bottom: 3px;
+    padding-left: 12px;
+    width: 100%;
+    font-size: 15px;
+}
+
+.ui-menu .ui-menu-item a
+{
+    display: block;
+    padding: 2px;
+    text-decoration: -webkit-activelink;
+    cursor: pointer;
+
+}
+.ui-menu .ui-menu-item a:hover
+{
+    display: block;
+    padding: 2px;
+    text-decoration: none;
+    color: #4488F6;
+    cursor: pointer;
+    background-color: red;
+
+}
+.ui-widget-content a {
+    color: #2092FB;
+}
+
+.navbar-nav > li > a {
+    padding-right: 30px;
+}
+
+#addButton {
+    margin-left: 10px;
+
+}
+#allCompH {
+    margin-left: 10px;
+}
+
+#hrDetail {
+    padding: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-horizontal .form-group {
+    margin-left: -100px;
+    margin-right: 50px;
+}
+
+#editSubButtons {
+    margin-left: -15px;
+    margin-bottom: 50px;
 }

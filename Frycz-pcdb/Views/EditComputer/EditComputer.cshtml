@@ -9,150 +9,189 @@
 
 }
 
-<h2>EditComputer</h2>
+<h2>Edit computer</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Save", "EditComputer"))
 {
     @Html.AntiForgeryToken()
-    <h4>computer</h4>
-    <hr /> 
-<div class="form-horizontal" id="editDiv">
+    <h4>@Model.name</h4>
 
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.idcomputer)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <hr id="hredit"/> 
-    <div class="form-group">
-        @Html.LabelFor(model => model.user.fullname, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div>
-                <button type="submit" id="userInputButton"><span class="glyphicon glyphicon-search"></span><i class="fa fa-search"></i></button>
-                <input readonly id="userInput" type="text" class="form-control" autocomplete="off">
-        
+    <hr />
+    <div class="form-horizontal" id="editDiv">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.idcomputer)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("userNotFound", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.user.fullname, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div>
+                    <input id="userInput" name="userInput" value="@Model.user.fullname" type="text" class="form-control userInput">
+                    <button type="button" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        <hr id="hredit" />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mac_address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mac_address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.mac_address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.serial_number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.serial_number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.serial_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.inventory_number, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.inventory_number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.inventory_number, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.create_time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.create_time, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.create_time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.last_update_time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.last_update_time, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.last_update_time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.guarantee, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.guarantee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.guarantee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idos, "OS: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idos", ViewBag.os as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
+                <button type="submit" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                @Html.ValidationMessageFor(model => model.idos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.computer_brand.modelAndMaker, "Computer model: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Computer model", ViewBag.model as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
+                <button type="submit" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                @Html.ValidationMessageFor(model => model.idos, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idcomputer_brand, "Computer type: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Computer type", ViewBag.type as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idcomputer_brand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idcomputer_parameters, "Computer parameters: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idcomputer_parameters", ViewBag.parameters as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
+                <button type="submit" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                @Html.ValidationMessageFor(model => model.idcomputer_parameters, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.iddiscarded_info, "Discarded: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="discarded" readonly="readonly" value='@if (Model.discarded_info == null)
+                                                                 {
+                                                                     @ViewBag.discarded;
+
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     @Model.discarded_info.date;
+
+                                                                 }' type="text" class="form-control">
+                @Html.ValidationMessageFor(model => model.iddiscarded_info, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.bpcs_sessions, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.bpcs_sessions, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.bpcs_sessions, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
     </div>
+    <hr />
+
     <div class="form-group">
-        @Html.LabelFor(model => model.mac_address, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.mac_address, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.mac_address, "", new { @class = "text-danger" })
+        <div class="col-md-offset-2 col-md-10" id="editSubButtons">
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="button" onclick="location.href = '@Url.Action("Index", "ComputerDetail", Model)'" class="btn btn-light">Cancel</button>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.serial_number, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.serial_number, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.serial_number, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.inventory_number, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.inventory_number, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.inventory_number, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.create_time, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.create_time, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.create_time, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.last_update_time, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.last_update_time, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.last_update_time, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.comment, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.comment, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.comment, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.guarantee, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.guarantee, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.guarantee, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.idos, "OS: ", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("idos", ViewBag.os as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idos, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.idcomputer_brand, "idcomputer_brand", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("idcomputer_brand", ViewBag.type as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idcomputer_brand, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.idcomputer_brand, "Computer type: ", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Computer type", ViewBag.type as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idcomputer_brand, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.idcomputer_parameters, "idcomputer_parameters", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("idcomputer_parameters", new SelectList("1", "2"), htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.idcomputer_parameters, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.iddiscarded_info, "iddiscarded_info", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("iddiscarded_info", new SelectList("1", "2"), htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.iddiscarded_info, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.bpcs_sessions, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.bpcs_sessions, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.bpcs_sessions, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+
+<script type="text/javascript">
+
+    $("#userInput").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetSearchValueUser","EditComputer")',
+                dataType: 'json',
+                data: { search: $("#userInput").val() },
+                success: function(data) {
+                    response($.map(data,
+                        function(item) {
+                            return { label: item, value: item }
+                        }));
+                },
+                error: function(xhr, status, error) {
+                    alert("Error");
+                }
+            });
+        }
+    });
+</script>
