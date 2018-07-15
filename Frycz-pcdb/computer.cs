@@ -28,12 +28,11 @@ namespace Frycz_pcdb
         public Nullable<int> idcomputer_brand { get; set; }
         public Nullable<int> idcomputer_type { get; set; }
         public Nullable<int> idcomputer_parameters { get; set; }
-        public Nullable<int> iddiscarded_info { get; set; }
         public Nullable<int> iduser { get; set; }
+        public Nullable<System.DateTime> discardedDate { get; set; }
     
         public virtual computer_parameters computer_parameters { get; set; }
         public virtual computer_type computer_type { get; set; }
-        public virtual discarded_info discarded_info { get; set; }
         public virtual o o { get; set; }
         public virtual user user { get; set; }
         public virtual computer_brand computer_brand { get; set; }

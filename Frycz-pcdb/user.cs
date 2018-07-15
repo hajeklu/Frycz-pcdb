@@ -18,7 +18,6 @@ namespace Frycz_pcdb
         public user()
         {
             this.computers = new HashSet<computer>();
-            this.discarded_info = new HashSet<discarded_info>();
         }
     
         public int iduser { get; set; }
@@ -29,7 +28,5 @@ namespace Frycz_pcdb
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<computer> computers { get; set; }
         public virtual department department { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<discarded_info> discarded_info { get; set; }
     }
 }

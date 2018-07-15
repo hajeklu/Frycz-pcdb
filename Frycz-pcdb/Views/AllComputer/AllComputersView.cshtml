@@ -10,103 +10,102 @@
 <p>
     <button type="button" id="addButton" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>    Add computers</button>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.user.firstname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.user.lastname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mac_address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.serial_number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.inventory_number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.last_update_time)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.guarantee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.computer_brand.model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.computer_parameters.processor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.comment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.discarded_info.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.o.name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.user.firstname)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.user.lastname)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.mac_address)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.serial_number)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.inventory_number)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.last_update_time)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.guarantee)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.computer_brand.model)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.computer_parameters.processor)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.comment)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.discarded_info.date) - @Html.DisplayFor(modelItem => item.discarded_info.user.fullname)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.o.name)
-        </td>
-        <td id="myRow">
-            @Html.DisplayFor(modelItem => item.bpcs_sessions)
-        </td>
-        <td id="myRow">
-            <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", item)'" class="btn btn-warning"><span class="
-glyphicon glyphicon-pencil"></span>   Edit</button>
-            <button type="button" onclick="location.href = '@Url.Action("Index", "ComputerDetail", item)'" class="btn btn-info .btn-group-sm"><span class="
-glyphicon glyphicon-edit"></span>   Details</button>
-        </td>
-    </tr>
-}
-
+<table id="example" class="table table-striped display">
+    <thead>
+        <tr>
+            <th class="sorting">
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user.lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user.firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mac_address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.serial_number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.inventory_number)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_update_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guarantee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.computer_brand.model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.computer_parameters.processor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.discardedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.o.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.bpcs_sessions)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td id="myRow">
+                <a href="@Url.Action("Index", "ComputerDetail", item)">@Html.DisplayFor(modelItem => item.name)   <span class="glyphicon glyphicon-edit"></span></a>
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.user.lastname)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.user.firstname)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.mac_address)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.serial_number)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.inventory_number)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.last_update_time)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.guarantee)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.computer_brand.model)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.computer_parameters.processor)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.comment)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.discardedDate)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.o.name)
+            </td>
+            <td id="myRow">
+                @Html.DisplayFor(modelItem => item.bpcs_sessions)
+            </td>
+        </tr>
+    }
+    </tbody>
 </table>
 
 <script type="text/javascript">
@@ -116,5 +115,14 @@ glyphicon glyphicon-edit"></span>   Details</button>
             window.location = $(this).data("href");
         });
     });
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "paging": false,
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf'
+            ]
+        });
+    } );
 
 </script>

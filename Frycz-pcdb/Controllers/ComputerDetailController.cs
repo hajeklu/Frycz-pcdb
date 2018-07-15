@@ -17,11 +17,20 @@ namespace Frycz_pcdb.Controllers
             {
                 entities.Configuration.LazyLoadingEnabled = false;
                 var comps = entities.computers.Where(c => c.idcomputer == computerIn.idcomputer).Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
-                    .Include(c => c.computer_type).Include(c => c.computer_brand).Include(c => c.discarded_info).FirstOrDefault();
+                    .Include(c => c.computer_type).Include(c => c.computer_brand).FirstOrDefault();
                 return View("ComputerDetail", comps);
             }
 
 
+        }
+
+        public ActionResult Discard(computer computerIn)
+        {
+
+
+
+
+            return View("ComputerDetail");
         }
     }
 }

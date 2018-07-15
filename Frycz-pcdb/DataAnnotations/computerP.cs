@@ -42,14 +42,17 @@ namespace Frycz_pcdb
             public string comment { get; set; }
 
             [Display(Name = "Guarantee to: ")]
-            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM.dd.yyyy HH:mm}")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM.dd.yyyy}")]
             public Nullable<System.DateTime> guarantee { get; set; }
+
+            [Display(Name = "Discarded date: ")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM.dd.yyyy}")]
+            public Nullable<System.DateTime> discardedDate { get; set; }
 
             public Nullable<int> idos { get; set; }
             public Nullable<int> idcomputer_brand { get; set; }
             public Nullable<int> idcomputer_type { get; set; }
             public Nullable<int> idcomputer_parameters { get; set; }
-            public Nullable<int> iddiscarded_info { get; set; }
             public Nullable<int> iduser { get; set; }
         }
     }

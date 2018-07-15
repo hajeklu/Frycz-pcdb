@@ -198,7 +198,6 @@
     <Compile Include="DataAnnotations\computer_brandP.cs" />
     <Compile Include="DataAnnotations\computer_parametersP.cs" />
     <Compile Include="DataAnnotations\computer_typeP.cs" />
-    <Compile Include="DataAnnotations\discarded_infoP.cs" />
     <Compile Include="DataAnnotations\oP.cs" />
     <Compile Include="DataAnnotations\userP.cs" />
     <Compile Include="DBModel.Context.cs">
@@ -219,9 +218,6 @@
     <Compile Include="department.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="discarded_info.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -230,6 +226,7 @@
     </Compile>
     <Compile Include="Models\EncryptHelper.cs" />
     <Compile Include="Models\Frycz_pcdb_MemberShipProvider.cs" />
+    <Compile Include="Models\Validator.cs" />
     <Compile Include="o.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -303,6 +300,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\zf_logo.jpg" />
+    <Content Include="Scripts\Additional_methods.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -316,7 +314,10 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
     <Content Include="images\desktop.ini" />
+    <Content Include="Content\datatables.min.css" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\dataTable.min.js" />
+    <Content Include="Scripts\dataTables.bootsrap.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -329,6 +330,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pdfmake.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

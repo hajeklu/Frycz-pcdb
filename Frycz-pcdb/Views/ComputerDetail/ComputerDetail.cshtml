@@ -136,14 +136,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.discarded_info.date)
+            @Html.DisplayNameFor(model => model.discardedDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.discarded_info.date) @if (!Model.user.fullname.Equals("") && Model.user != null)
-                                                                 {
-                                                                     @Html.DisplayFor(model => model.discarded_info.user.fullname)
-                                                                 }
+            @Html.DisplayFor(model => model.discardedDate) 
         </dd>
 
         <dt>
@@ -174,4 +171,34 @@
     </dl>
     <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", Model)'" class="btn btn-warning"><span class="
 glyphicon glyphicon-pencil"></span>     Edit</button>
+    <button type="button" id="discardPop" class="btn btn-secondary"><span class="
+glyphicon glyphicon-new-window"></span>     Discard</button>
+    <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", Model)'" class="btn btn-danger"><span class="
+glyphicon glyphicon-remove"></span>     Delete</button>
 </div>
+<div id="popDiscard" style="display: none">
+    <p>Really you wanna discard this pc ?</p>
+</div>
+
+<script type="text/javascript">
+
+    $(function() {
+        $("#discardPop").click(function() {
+            $("#popDiscard").dialog({
+                title: "Discard computer",
+                width: 200,
+                height: 200,
+                modal: true,
+                buttons: {
+                    Close: function() {
+                        $(this).dialog('close');
+                    }
+                }
+
+            });
+        });
+    })
+
+
+</script>
+

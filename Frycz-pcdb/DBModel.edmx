@@ -23,8 +23,8 @@
           <Property Name="idcomputer_brand" Type="int" />
           <Property Name="idcomputer_type" Type="int" />
           <Property Name="idcomputer_parameters" Type="int" />
-          <Property Name="iddiscarded_info" Type="int" />
           <Property Name="iduser" Type="int" />
+          <Property Name="discardedDate" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="computer_brand">
           <Key>
@@ -59,14 +59,6 @@
           <Property Name="iddepartment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="title" Type="varchar" MaxLength="100" />
           <Property Name="number" Type="int" />
-        </EntityType>
-        <EntityType Name="discarded_info">
-          <Key>
-            <PropertyRef Name="iddiscarded_info" />
-          </Key>
-          <Property Name="iddiscarded_info" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="date" Type="datetime" Precision="0" />
-          <Property Name="iduser" Type="int" />
         </EntityType>
         <EntityType Name="logging">
           <Key>
@@ -151,18 +143,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="iddiscarded_info">
-          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="0..1" />
-          <End Role="computer" Type="Self.computer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="discarded_info">
-              <PropertyRef Name="iddiscarded_info" />
-            </Principal>
-            <Dependent Role="computer">
-              <PropertyRef Name="iddiscarded_info" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="idos">
           <End Role="os" Type="Self.os" Multiplicity="0..1" />
           <End Role="computer" Type="Self.computer" Multiplicity="*" />
@@ -187,18 +167,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="iduser">
-          <End Role="user" Type="Self.user" Multiplicity="0..1" />
-          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="iduser" />
-            </Principal>
-            <Dependent Role="discarded_info">
-              <PropertyRef Name="iduser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="idusers">
           <End Role="user" Type="Self.user" Multiplicity="0..1" />
           <End Role="computer" Type="Self.computer" Multiplicity="*" />
@@ -217,7 +185,6 @@
           <EntitySet Name="computer_parameters" EntityType="Self.computer_parameters" Schema="frycz_pcdb" store:Type="Tables" />
           <EntitySet Name="computer_type" EntityType="Self.computer_type" Schema="frycz_pcdb" store:Type="Tables" />
           <EntitySet Name="department" EntityType="Self.department" Schema="frycz_pcdb" store:Type="Tables" />
-          <EntitySet Name="discarded_info" EntityType="Self.discarded_info" Schema="frycz_pcdb" store:Type="Tables" />
           <EntitySet Name="logging" EntityType="Self.logging" Schema="frycz_pcdb" store:Type="Tables" />
           <EntitySet Name="os" EntityType="Self.os" Schema="frycz_pcdb" store:Type="Tables" />
           <EntitySet Name="registered_user" EntityType="Self.registered_user" Schema="frycz_pcdb" store:Type="Tables" />
@@ -238,10 +205,6 @@
             <End Role="department" EntitySet="department" />
             <End Role="user" EntitySet="user" />
           </AssociationSet>
-          <AssociationSet Name="iddiscarded_info" Association="Self.iddiscarded_info">
-            <End Role="discarded_info" EntitySet="discarded_info" />
-            <End Role="computer" EntitySet="computer" />
-          </AssociationSet>
           <AssociationSet Name="idos" Association="Self.idos">
             <End Role="os" EntitySet="os" />
             <End Role="computer" EntitySet="computer" />
@@ -249,10 +212,6 @@
           <AssociationSet Name="idregistered_user" Association="Self.idregistered_user">
             <End Role="registered_user" EntitySet="registered_user" />
             <End Role="logging" EntitySet="logging" />
-          </AssociationSet>
-          <AssociationSet Name="iduser" Association="Self.iduser">
-            <End Role="user" EntitySet="user" />
-            <End Role="discarded_info" EntitySet="discarded_info" />
           </AssociationSet>
           <AssociationSet Name="idusers" Association="Self.idusers">
             <End Role="user" EntitySet="user" />
@@ -281,14 +240,13 @@
           <Property Name="idcomputer_brand" Type="Int32" />
           <Property Name="idcomputer_type" Type="Int32" />
           <Property Name="idcomputer_parameters" Type="Int32" />
-          <Property Name="iddiscarded_info" Type="Int32" />
           <Property Name="iduser" Type="Int32" />
           <NavigationProperty Name="computer_parameters" Relationship="Self.idcomputer_parameters" FromRole="computer" ToRole="computer_parameters" />
           <NavigationProperty Name="computer_type" Relationship="Self.idcomputer_type" FromRole="computer" ToRole="computer_type" />
-          <NavigationProperty Name="discarded_info" Relationship="Self.iddiscarded_info" FromRole="computer" ToRole="discarded_info" />
           <NavigationProperty Name="o" Relationship="Self.idos" FromRole="computer" ToRole="os" />
           <NavigationProperty Name="user" Relationship="Self.idusers" FromRole="computer" ToRole="user" />
           <NavigationProperty Name="computer_brand" Relationship="frycz_pcdbModel.idcomputee_brand1" FromRole="computer" ToRole="computer_brand" />
+          <Property Name="discardedDate" Type="DateTime" />
         </EntityType>
         <EntityType Name="computer_parameters">
           <Key>
@@ -318,16 +276,6 @@
           <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="number" Type="Int32" />
           <NavigationProperty Name="users" Relationship="Self.iddepartment" FromRole="department" ToRole="user" />
-        </EntityType>
-        <EntityType Name="discarded_info">
-          <Key>
-            <PropertyRef Name="iddiscarded_info" />
-          </Key>
-          <Property Name="iddiscarded_info" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="date" Type="DateTime" />
-          <Property Name="iduser" Type="Int32" />
-          <NavigationProperty Name="computers" Relationship="Self.iddiscarded_info" FromRole="discarded_info" ToRole="computer" />
-          <NavigationProperty Name="user" Relationship="Self.iduser" FromRole="discarded_info" ToRole="user" />
         </EntityType>
         <EntityType Name="logging">
           <Key>
@@ -368,7 +316,6 @@
           <Property Name="iddepartment" Type="Int32" />
           <NavigationProperty Name="computers" Relationship="Self.idusers" FromRole="user" ToRole="computer" />
           <NavigationProperty Name="department" Relationship="Self.iddepartment" FromRole="user" ToRole="department" />
-          <NavigationProperty Name="discarded_info" Relationship="Self.iduser" FromRole="user" ToRole="discarded_info" />
         </EntityType>
         <Association Name="idcomputer_parameters">
           <End Role="computer_parameters" Type="Self.computer_parameters" Multiplicity="0..1" />
@@ -391,18 +338,6 @@
             </Principal>
             <Dependent Role="computer">
               <PropertyRef Name="idcomputer_type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="iddiscarded_info">
-          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="0..1" />
-          <End Role="computer" Type="Self.computer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="discarded_info">
-              <PropertyRef Name="iddiscarded_info" />
-            </Principal>
-            <Dependent Role="computer">
-              <PropertyRef Name="iddiscarded_info" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -442,18 +377,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="iduser">
-          <End Role="user" Type="Self.user" Multiplicity="0..1" />
-          <End Role="discarded_info" Type="Self.discarded_info" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="iduser" />
-            </Principal>
-            <Dependent Role="discarded_info">
-              <PropertyRef Name="iduser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="idregistered_user">
           <End Role="registered_user" Type="Self.registered_user" Multiplicity="0..1" />
           <End Role="logging" Type="Self.logging" Multiplicity="*" />
@@ -471,7 +394,6 @@
           <EntitySet Name="computer_parameters" EntityType="Self.computer_parameters" />
           <EntitySet Name="computer_type" EntityType="Self.computer_type" />
           <EntitySet Name="departments" EntityType="Self.department" />
-          <EntitySet Name="discarded_info" EntityType="Self.discarded_info" />
           <EntitySet Name="loggings" EntityType="Self.logging" />
           <EntitySet Name="os" EntityType="Self.o" />
           <EntitySet Name="registered_user" EntityType="Self.registered_user" />
@@ -482,10 +404,6 @@
           </AssociationSet>
           <AssociationSet Name="idcomputer_type" Association="Self.idcomputer_type">
             <End Role="computer_type" EntitySet="computer_type" />
-            <End Role="computer" EntitySet="computers" />
-          </AssociationSet>
-          <AssociationSet Name="iddiscarded_info" Association="Self.iddiscarded_info">
-            <End Role="discarded_info" EntitySet="discarded_info" />
             <End Role="computer" EntitySet="computers" />
           </AssociationSet>
           <AssociationSet Name="idos" Association="Self.idos">
@@ -499,10 +417,6 @@
           <AssociationSet Name="iddepartment" Association="Self.iddepartment">
             <End Role="department" EntitySet="departments" />
             <End Role="user" EntitySet="users" />
-          </AssociationSet>
-          <AssociationSet Name="iduser" Association="Self.iduser">
-            <End Role="user" EntitySet="users" />
-            <End Role="discarded_info" EntitySet="discarded_info" />
           </AssociationSet>
           <AssociationSet Name="idregistered_user" Association="Self.idregistered_user">
             <End Role="registered_user" EntitySet="registered_user" />
@@ -544,6 +458,7 @@
           <EntitySetMapping Name="computers">
             <EntityTypeMapping TypeName="frycz_pcdbModel.computer">
               <MappingFragment StoreEntitySet="computer">
+                <ScalarProperty Name="discardedDate" ColumnName="discardedDate" />
                 <ScalarProperty Name="idcomputer" ColumnName="idcomputer" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="bpcs_sessions" ColumnName="bpcs_sessions" />
@@ -558,7 +473,6 @@
                 <ScalarProperty Name="idcomputer_brand" ColumnName="idcomputer_brand" />
                 <ScalarProperty Name="idcomputer_type" ColumnName="idcomputer_type" />
                 <ScalarProperty Name="idcomputer_parameters" ColumnName="idcomputer_parameters" />
-                <ScalarProperty Name="iddiscarded_info" ColumnName="iddiscarded_info" />
                 <ScalarProperty Name="iduser" ColumnName="iduser" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -589,15 +503,6 @@
                 <ScalarProperty Name="iddepartment" ColumnName="iddepartment" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="number" ColumnName="number" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="discarded_info">
-            <EntityTypeMapping TypeName="frycz_pcdbModel.discarded_info">
-              <MappingFragment StoreEntitySet="discarded_info">
-                <ScalarProperty Name="iddiscarded_info" ColumnName="iddiscarded_info" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="iduser" ColumnName="iduser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

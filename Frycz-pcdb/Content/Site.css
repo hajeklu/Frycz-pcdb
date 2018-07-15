@@ -276,3 +276,7 @@ footer {
     margin-left: -15px;
     margin-bottom: 50px;
 }
+
+.btn-group, .btn-group-vertical {
+    margin-left: 10px;
+}

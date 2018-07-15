@@ -16,7 +16,7 @@ namespace Frycz_pcdb.Controllers
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 entities.Configuration.LazyLoadingEnabled = false;
-                var comps = entities.computers.Include(c => c.discarded_info).Include(c => c.computer_brand).Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.computer_type).ToList();
+                var comps = entities.computers.Include(c => c.o).Include(c => c.computer_brand).Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.computer_type).ToList();
                 return View("AllComputersView",comps);
             }
         }
