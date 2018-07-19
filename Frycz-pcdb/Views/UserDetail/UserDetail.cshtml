@@ -1,0 +1,53 @@
+﻿@model Frycz_pcdb.user
+
+@{
+    ViewBag.Title = "UserDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User detail</h2>
+
+<div>
+    <h4>user</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastname)
+        </dd>
+        <hr />
+        
+        <dt>
+            User`s computers: 
+        </dt>
+        <dd>
+            <span class="glyphicon glyphicon-arrow-down"></span>
+        </dd>
+        
+        @foreach (computer computer in @Model.computers)
+        {
+            <dt>
+                Computer name: 
+            </dt>
+
+            <dd>
+                <a href="@Url.Action("Index", "ComputerDetail", computer)"><span class="glyphicon glyphicon-edit">@computer.name</span></a>
+            </dd>
+        }
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.iduser }) |
+    @Html.ActionLink("Back to List", "Index", "AllUsers")
+</p>

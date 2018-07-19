@@ -18,19 +18,34 @@ namespace Frycz_pcdb.Controllers
                 entities.Configuration.LazyLoadingEnabled = false;
                 var comps = entities.computers.Where(c => c.idcomputer == computerIn.idcomputer).Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
                     .Include(c => c.computer_type).Include(c => c.computer_brand).FirstOrDefault();
+
                 return View("ComputerDetail", comps);
             }
 
 
         }
 
+        [Authorize]
         public ActionResult Discard(computer computerIn)
         {
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                var comp = entities.computers.FirstOrDefault(c => c.idcomputer == computerIn.idcomputer);
+                comp.discardedDate = DateTime.Now;
+                entities.SaveChanges();
+                return RedirectToAction("Index", "ComputerDetail", comp);
+            }
+        }
 
-
-
-
-            return View("ComputerDetail");
+        public ActionResult Delete(computer computerIn)
+        {
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                var comp = entities.computers.FirstOrDefault(c => c.idcomputer == computerIn.idcomputer);
+                entities.computers.Remove(comp);
+                entities.SaveChanges();
+                return RedirectToAction("Index", "AllComputer", comp);
+            }
         }
     }
 }

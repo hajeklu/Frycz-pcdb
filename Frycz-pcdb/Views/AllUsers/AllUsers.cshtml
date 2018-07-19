@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Frycz_pcdb.user>
+
+@{
+    ViewBag.Title = "AllUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Users</h2>
+
+<p>
+    <button type="button" id="addButton" onclick="location.href = '@Url.Action("Index", "AddComputer", Model)'" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>    Add user</button>
+</p>
+<table id="example" class="table table-striped display">
+    <thead>
+    <tr class="sorting">
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firstname)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Index", "UserDetail", item)">@Html.DisplayFor(modelItem => item.lastname)   <span class="glyphicon glyphicon-edit"></span></a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstname)
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div>
+    <p>
+        <br />
+        <br />
+    </p>
+
+</div>
+
+<script type="text/javascript">
+
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "paging": false,
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf'
+            ]
+        });
+    } );
+
+</script>

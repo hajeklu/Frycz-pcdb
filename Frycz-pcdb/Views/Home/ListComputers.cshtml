@@ -6,7 +6,7 @@
 <div class="container">
 <h1 class="jumbotron-heading text-center">List of Computers</h1>
 
-<table class="table table-hover">
+<table class="table">
     <tr>
         <th scope="col">
             @Html.DisplayNameFor(model => model.name)
@@ -26,9 +26,9 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr onclick="document.location = '@Url.Action("Index", "ComputerDetail", item)';">
+    <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            <a href="@Url.Action("Index", "ComputerDetail", item)">@Html.DisplayFor(modelItem => item.name)   <span class="glyphicon glyphicon-edit"></span></a>
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.user.lastname)

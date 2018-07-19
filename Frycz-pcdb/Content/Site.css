@@ -161,11 +161,27 @@ dd {
     padding-left: 12px;
 }
 
+.addInput {
+    width: 100%;
+    display: inline-block;
+    margin-right: -4px;
+    padding: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    padding-top: 6px;
+    padding-right: 12px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+}
+
 .userInputButton {
     height: 34px;
     width: 6%;
     padding: 0px;
     margin: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    margin-bottom: 2px;
 }
 
 #editDiv {
@@ -183,39 +199,36 @@ footer {
     background-color: #ffffff;
 }
 
-.ui-corner-all
+#userInput .ui-corner-all
 {
     -moz-border-radius: 4px 4px 4px 4px;
 }
-.ui-widget-content {
-    border: 1px solid #848484;
+#userInput .ui-widget-content {
+    border: 1px solid black;
     color: black;
-        
     font-size: 50px;
     background-color: white
 }
-.ui-widget
-{
+#userInput .ui-widget {
     font-family: Verdana,Arial,sans-serif;
     font-size: 13px;
 }
-.ui-menu
-{
+#userInput .ui-menu {
     display: block;
     float: left;
     list-style: none outside none;
     margin: 0;
     padding: 0px;
 }
-.ui-autocomplete
-{
+.ui-autocomplete {
     cursor: pointer;
     position: absolute;
 }
     .ui-autocomplete :hover {
         background-color: #2092FB;
+        border: none;
     }
-.ui-menu .ui-menu-item {
+#userInput .ui-menu .ui-menu-item {
     clear: left;
     float: left;
     margin: 0;
@@ -227,32 +240,31 @@ footer {
     font-size: 15px;
 }
 
-.ui-menu .ui-menu-item a
-{
-    display: block;
-    padding: 2px;
-    text-decoration: -webkit-activelink;
-    cursor: pointer;
-
-}
-.ui-menu .ui-menu-item a:hover
-{
-    display: block;
-    padding: 2px;
-    text-decoration: none;
-    color: #4488F6;
-    cursor: pointer;
-    background-color: red;
-
-}
-.ui-widget-content a {
+#userInput .ui-menu .ui-menu-item a {
+        display: block;
+        padding: 2px;
+        text-decoration: -webkit-activelink;
+        cursor: pointer;
+    }
+#userInput .ui-menu .ui-menu-item a:hover {
+        display: block;
+        padding: 2px;
+        text-decoration: none;
+        color: #4488F6;
+        cursor: pointer;
+    }
+#userInput .ui-widget-content a {
     color: #2092FB;
 }
 
-.navbar-nav > li > a {
+#userInput .navbar-nav > li > a {
     padding-right: 30px;
 }
-
+.ui-menu .ui-menu-item {
+    border: none;
+    padding: 0px;
+    font-size: 15px;
+}
 #addButton {
     margin-left: 10px;
 
@@ -279,4 +291,70 @@ footer {
 
 .btn-group, .btn-group-vertical {
     margin-left: 10px;
+}
+
+#addcount {
+    width: 80%;
+    padding-left: 20%;
+}
+#addcompbutton {
+    margin-top: 20px;
+}
+
+
+
+/*  -------------------   Menu   --------------------*/
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.overlay {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+}
+
+.overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+}
+@media screen and (max-height: 450px) {
+    .overlay {overflow-y: auto;}
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
 }

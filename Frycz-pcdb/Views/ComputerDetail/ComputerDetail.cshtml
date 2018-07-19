@@ -10,6 +10,12 @@
 <div>
     <h4>computer</h4>
     <hr />
+    @if (Model.discardedDate != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            This is computer is discarded from IT records. This computer should not be connected to the corporate network.
+        </div>
+    }
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.name)
@@ -140,7 +146,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.discardedDate) 
+            @Html.DisplayFor(model => model.discardedDate)
         </dd>
 
         <dt>
@@ -167,33 +173,78 @@
             @Html.DisplayFor(model => model.bpcs_sessions)
         </dd>
 
+        <!-- Modal for discard-->
+        <div id="modalDis" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Discard computer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Really you wanna discard computer <b>@Model.name</b> ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href = '@Url.Action("Discard", "ComputerDetail", Model)'">Discard</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal for delete-->
+        <div id="modalDel" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete computer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Really you wanna permanently delete computer <b>@Model.name</b> ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "ComputerDetail", Model)'">Delete</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
 
     </dl>
-    <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", Model)'" class="btn btn-warning"><span class="
-glyphicon glyphicon-pencil"></span>     Edit</button>
-    <button type="button" id="discardPop" class="btn btn-secondary"><span class="
-glyphicon glyphicon-new-window"></span>     Discard</button>
-    <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", Model)'" class="btn btn-danger"><span class="
-glyphicon glyphicon-remove"></span>     Delete</button>
+    @if (User.Identity.Name != null && !User.Identity.Name.Equals(""))
+    {
+        <button type="button" onclick="location.href = '@Url.Action("Index", "EditComputer", Model)'" class="btn btn-warning">
+            <span class="glyphicon glyphicon-pencil"></span> Edit
+        </button>
+        <button type="button" data-toggle="modal" data-target="#modalDis" class="btn btn-secondary">
+            <span class="glyphicon glyphicon-new-window"></span> Discard
+        </button>
+        <button type="button" data-toggle="modal" data-target="#modalDel" class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+        </button>
+    }
 </div>
-<div id="popDiscard" style="display: none">
-    <p>Really you wanna discard this pc ?</p>
-</div>
+
+
 
 <script type="text/javascript">
 
     $(function() {
         $("#discardPop").click(function() {
-            $("#popDiscard").dialog({
+            $("#modal").dialog({
                 title: "Discard computer",
-                width: 200,
+                width: 1000,
                 height: 200,
                 modal: true,
-                buttons: {
-                    Close: function() {
-                        $(this).dialog('close');
-                    }
-                }
+
 
             });
         });
@@ -201,4 +252,3 @@ glyphicon glyphicon-remove"></span>     Delete</button>
 
 
 </script>
-

@@ -94,7 +94,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.guarantee, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.guarantee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.guarantee, new { htmlAttributes = new {@class = "form-control date-picker", autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.guarantee, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -103,7 +103,7 @@
             @Html.LabelFor(model => model.idos, "OS: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idos", ViewBag.os as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
-                <button type="submit" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                <button type="button" id="userInputButton" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 @Html.ValidationMessageFor(model => model.idos, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -112,7 +112,7 @@
             @Html.LabelFor(model => model.computer_brand.modelAndMaker, "Computer model: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idcomputerBrand", ViewBag.model as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
-                <button type="submit" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                <button type="submit" id="userInputButton" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 @Html.ValidationMessageFor(model => model.idos, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -120,7 +120,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.idcomputer_brand, "Computer type: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Computer type", ViewBag.type as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("idcomputerType", ViewBag.type as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
+                <button type="submit" id="userInputButton" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 @Html.ValidationMessageFor(model => model.idcomputer_brand, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -129,7 +130,7 @@
             @Html.LabelFor(model => model.idcomputer_parameters, "Computer parameters: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idcomputer_parameters", ViewBag.parameters as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
-                <button type="submit" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                <button type="submit" id="userInputButton" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 @Html.ValidationMessageFor(model => model.idcomputer_parameters, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -160,7 +161,6 @@
             </div>
         </div>
 
-
     </div>
     <hr />
 
@@ -171,6 +171,7 @@
         </div>
     </div>
 
+   
 }
 <div>
     <p>
@@ -186,6 +187,7 @@
 
 <script type="text/javascript">
 
+
     $("#userInput").autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -200,9 +202,16 @@
                         }));
                 },
                 error: function(xhr, status, error) {
-                    alert("Error");
+                    alert("Error: users loading error.");
                 }
             });
         }
     });
+
+
+    $(function() {
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('.date-picker').datepicker();
+    });
+
 </script>

@@ -25,6 +25,8 @@ namespace Frycz_pcdb
 
     public partial class user
     {
+        private string _fullname;
+
         [Display(Name = "User fullname: ")]
         [NotMapped]
         public string fullname
@@ -34,7 +36,7 @@ namespace Frycz_pcdb
                 return
                     (lastname + " " + firstname);
             }
-            set { fullname = value; }
+            set { _fullname = value; }
         }
     }
 }

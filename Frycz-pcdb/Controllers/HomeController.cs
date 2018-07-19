@@ -28,11 +28,9 @@ namespace Frycz_pcdb.Controllers
             string searchTextUpper = searchText.ToUpper();
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
-                var pc = from computer in entities.computers
-                    where computer.name.Contains(searchTextUpper)
-                    select computer;
-                pc = pc.Include(m => m.user);
-                pc = pc.Include(m => m.computer_type);
+
+                entities.Configuration.LazyLoadingEnabled = false;
+                var pc = entities.computers.Include(c => c.user).Include(c => c.computer_type).Where(c => c.name.Contains(searchText) || c.user.lastname.Contains(searchText) || c.user.firstname.Contains(searchText));
 
                 List<computer> computersList = pc.ToList();
 

@@ -20,7 +20,8 @@ namespace Frycz_pcdb.Controllers
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 entities.Configuration.LazyLoadingEnabled = false;
-                var comp = entities.computers.Where(c => c.idcomputer == computer.idcomputer).Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
+                var comp = entities.computers.Where(c => c.idcomputer == computer.idcomputer).Include(c => c.user)
+                    .Include(c => c.computer_parameters).Include(c => c.o)
                     .Include(c => c.computer_type).Include(c => c.computer_brand).FirstOrDefault();
 
                 // for dropdown list
@@ -50,6 +51,7 @@ namespace Frycz_pcdb.Controllers
 
                 listTypePc.Add(item);
             }
+
             ViewBag.type = listTypePc;
 
 
@@ -78,7 +80,7 @@ namespace Frycz_pcdb.Controllers
                 Text = null,
                 Value = null
             };
-           
+
             listmodel.Add(modelEmpty);
 
             foreach (var model in entities.computer_brand.ToList())
@@ -136,7 +138,8 @@ namespace Frycz_pcdb.Controllers
             List<string> result = new List<string>();
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
-                List<user> usereList = entities.users.Where(x => x.lastname.Contains(search) || x.firstname.Contains(search)).ToList();
+                List<user> usereList = entities.users
+                    .Where(x => x.lastname.Contains(search) || x.firstname.Contains(search)).ToList();
 
                 foreach (user user in usereList)
                 {
@@ -144,110 +147,91 @@ namespace Frycz_pcdb.Controllers
                     result.Add(user.lastname + " " + user.firstname);
                 }
 
-               
+
             }
-            return new JsonResult { Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            return new JsonResult {Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
 
-        public ActionResult Save(computer computerIn, string userInput, Nullable<int> idcomputer_parameters, Nullable<int> idcomputerBrand)
+        [Authorize]
+        public ActionResult Save(computer computerIn, string userInput, Nullable<int> idcomputer_parameters,
+            Nullable<int> idcomputerBrand, Nullable<int> idcomputerType)
         {
             string userErrorMessage = "User name not found.";
-            string computerErrorMessage = "Computer name in not valid.";
+            string computerErrorMessage = "Computer name is invalid or in use.";
 
-            // validation user name
-            if (userInput == null || userInput.Equals(String.Empty) || userInput.Length < 3)
-            {
-                ModelState.AddModelError("userNotFound", userErrorMessage);
-            }
-            string[] userStrig = userInput.Split(' ');
-
-            if (userStrig.Length < 2)
-            {
-                ModelState.AddModelError("userNotFound", userErrorMessage);
-            }
-
-
-            if (!Validator.validComputerName(computerIn.name))
-            {
-                ModelState.AddModelError("computerName", computerErrorMessage);
-            }
-
-            if (ModelState.IsValid)
-            {
-
-                string lastname = userStrig[0];
-                string firstname = userStrig[1];
-
-
-                using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
-                {
-
-                    entities.Configuration.LazyLoadingEnabled = false;
-                    user user = entities.users.FirstOrDefault(e =>
-                        e.lastname.Equals(lastname) && e.firstname.Equals(firstname));
-
-                    computer comp = entities.computers.FirstOrDefault(c => c.idcomputer == computerIn.idcomputer);
-                    // if user not found return view back
-                    if (user != null)
-                    {
-                        comp.user = user;
-                    }
-                    else
-                    {
-                        var co = entities.computers.Where(c => c.idcomputer == computerIn.idcomputer)
-                            .Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
-                            .Include(c => c.computer_type).Include(c => c.computer_brand)
-                            .FirstOrDefault();
-                        makeViewBag(entities, co);
-                        ModelState.AddModelError("userNotFound", userErrorMessage);
-                        return View("EditComputer", co);
-                    }
-
-                    // update computers
-                    comp.bpcs_sessions = computerIn.bpcs_sessions;
-                    comp.mac_address = computerIn.mac_address;
-                    comp.serial_number = computerIn.serial_number;
-                    comp.idos = computerIn.idos;
-                    comp.comment = computerIn.comment;
-                    if (idcomputer_parameters == null)
-                    {
-                        comp.idcomputer_parameters = null;
-                    }
-                    else
-                    {
-                        comp.computer_parameters =
-                            entities.computer_parameters.FirstOrDefault(e =>
-                                e.idcomputer_parameters == idcomputer_parameters);
-                    }
-
-                    if (idcomputerBrand == null)
-                    {
-                        comp.idcomputer_brand = null;
-                    }
-                    else
-                    {
-                        comp.computer_brand =
-                            entities.computer_brand.FirstOrDefault(e => e.idcumputer_brand == idcomputerBrand);
-                    }
-
-                    comp.name = computerIn.name.ToUpper();
-                    comp.guarantee = computerIn.guarantee;
-                    comp.last_update_time = DateTime.Now;
-                    entities.SaveChanges();
-                    return RedirectToAction("Index", "ComputerDetail", comp);
-                }
-            }
-
-            // if mdoel in not valid return view 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
+
+                if (!Validator.validComputerName(computerIn.name))
+                {
+                    ModelState.AddModelError("computerName", computerErrorMessage);
+
+                    entities.Configuration.LazyLoadingEnabled = false;
+                    var co = entities.computers.Where(c => c.idcomputer == computerIn.idcomputer)
+                        .Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
+                        .Include(c => c.computer_type).Include(c => c.computer_brand)
+                        .FirstOrDefault();
+                    makeViewBag(entities, co);
+                    return View("EditComputer", co);
+
+
+                }
+
                 entities.Configuration.LazyLoadingEnabled = false;
-                var co = entities.computers.Where(c => c.idcomputer == computerIn.idcomputer)
-                    .Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
-                    .Include(c => c.computer_type).Include(c => c.computer_brand)
-                    .FirstOrDefault();
-                makeViewBag(entities, co);
-                return View("EditComputer", co);
+                computer comp = entities.computers.FirstOrDefault(c => c.idcomputer == computerIn.idcomputer);
+                
+                try
+                {
+                    user u = Validator.findUser(userInput);
+                    comp.iduser = u.iduser;
+
+                }
+                catch (Exception e)
+                {
+                    var co = entities.computers.Where(c => c.idcomputer == computerIn.idcomputer)
+                        .Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
+                        .Include(c => c.computer_type).Include(c => c.computer_brand)
+                        .FirstOrDefault();
+                    makeViewBag(entities, co);
+                    ModelState.AddModelError("userNotFound", userErrorMessage);
+                    return View("EditComputer", co);
+                }
+
+                // update computers
+                comp.bpcs_sessions = computerIn.bpcs_sessions;
+                comp.mac_address = computerIn.mac_address;
+                comp.serial_number = computerIn.serial_number;
+                comp.idos = computerIn.idos;
+                comp.comment = computerIn.comment;
+                comp.inventory_number = computerIn.inventory_number;
+                if (idcomputer_parameters == null)
+                {
+                    comp.idcomputer_parameters = null;
+                }
+                else
+                {
+                    comp.computer_parameters =
+                        entities.computer_parameters.FirstOrDefault(e =>
+                            e.idcomputer_parameters == idcomputer_parameters);
+                }
+
+                if (idcomputerBrand == null)
+                {
+                    comp.idcomputer_brand = null;
+                }
+                else
+                {
+                    comp.computer_brand =
+                        entities.computer_brand.FirstOrDefault(e => e.idcumputer_brand == idcomputerBrand);
+                }
+
+                comp.idcomputer_type = idcomputerType;
+                comp.name = computerIn.name.ToUpper();
+                comp.guarantee = computerIn.guarantee;
+                comp.last_update_time = DateTime.Now;
+                entities.SaveChanges();
+                return RedirectToAction("Index", "ComputerDetail", comp);
             }
         }
     }
