@@ -183,10 +183,13 @@
     <Compile Include="computer_brand.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AddComputerController.cs" />
-    <Compile Include="Controllers\AllUsersController.cs" />
+    <Compile Include="Controllers\ComputerTypeController.cs" />
+    <Compile Include="Controllers\computer\AddComputerController.cs" />
+    <Compile Include="Controllers\user\AddUserController.cs" />
+    <Compile Include="Controllers\user\AllUsersController.cs" />
+    <Compile Include="Controllers\user\EditUserController.cs" />
     <Compile Include="Controllers\FullPageMenuController.cs" />
-    <Compile Include="Controllers\UserDetailController.cs" />
+    <Compile Include="Controllers\user\UserDetailController.cs" />
     <Compile Include="DataAnnotations\computerP.cs" />
     <Compile Include="computer_parameters.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -194,9 +197,9 @@
     <Compile Include="computer_type.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AllComputerController.cs" />
-    <Compile Include="Controllers\ComputerDetailController.cs" />
-    <Compile Include="Controllers\EditComputerController.cs" />
+    <Compile Include="Controllers\computer\AllComputerController.cs" />
+    <Compile Include="Controllers\computer\ComputerDetailController.cs" />
+    <Compile Include="Controllers\computer\EditComputerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DataAnnotations\computer_brandP.cs" />
@@ -230,6 +233,7 @@
     </Compile>
     <Compile Include="Models\EncryptHelper.cs" />
     <Compile Include="Models\Frycz_pcdb_MemberShipProvider.cs" />
+    <Compile Include="Models\UserManager.cs" />
     <Compile Include="Models\Validator.cs" />
     <Compile Include="o.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -307,6 +311,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="images\zf_logo.jpg" />
+    <Content Include="images\zf_logo_min.jpg" />
     <Content Include="Scripts\Additional_methods.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -445,10 +450,14 @@
     <Content Include="Views\AddComputer\CountOfAdd.cshtml" />
     <Content Include="Views\AllUsers\AllUsers.cshtml" />
     <Content Include="Views\UserDetail\UserDetail.cshtml" />
+    <Content Include="Views\EditUser\EditUser.cshtml" />
+    <Content Include="Views\AddUser\AddUser.cshtml" />
+    <Content Include="Views\ComputerType\AllComputerType.cshtml" />
+    <Content Include="Views\ComputerType\EditComputerType.cshtml" />
+    <Content Include="Views\ComputerType\AddComputerType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\FullPageMenu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

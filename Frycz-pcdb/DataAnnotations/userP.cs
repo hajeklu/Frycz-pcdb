@@ -14,8 +14,10 @@ namespace Frycz_pcdb
         {
             public int iduser { get; set; }
             [Display(Name = "First name: ")]
+            [StringLength(int.MaxValue, MinimumLength = 3)]
             public string firstname { get; set; }
             [Display(Name = "Last name: ")]
+            [StringLength(int.MaxValue, MinimumLength = 3)]
             public string lastname { get; set; }
             public Nullable<int> iddepartment { get; set; }
 

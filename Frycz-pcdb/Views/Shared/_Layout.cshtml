@@ -32,37 +32,37 @@
 
 </head>
 <body>
-    <main role="main">
-
-        <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
-            <a href="@Url.Action("Index", "Home")"><img src="~/images/zf_logo_min.jpg" id="navImage" width="52" height="52" /></a>
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="@Url.Action("Index", "AllComputer")"><span class="glyphicon glyphicon-object-align-bottom"></span> Computer database</a>
-                </div>
-                <ul class="nav navbar-nav"></ul>
-                <ul class="nav navbar-nav navbar-right">
-
-                    @if (User.Identity.Name != null && !User.Identity.Name.Equals(""))
-                    {
-                        <li><a onclick="openNav()" href="#"><span class="glyphicon glyphicon-user"></span> User: <b>@User.Identity.Name</b></a></li>
-                        <li><a href='@Url.Action("Logout", "Home")' onclick="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-                    }
-                    else
-                    {
-                        <li><a href='@Url.Action("Index", "Login")'><span class="glyphicon glyphicon-log-in"></span> <b>Log In</b></a></li>
-                    }
-                </ul>
+<main role="main">
+    
+    <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+        <a href="@Url.Action("Index", "Home")"><img src="~/images/zf_logo_min.jpg" id="navImage" width="51" height="51"/></a>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "AllComputer")"><span class="glyphicon glyphicon-object-align-bottom"></span> Computer database</a>
             </div>
-        </nav>
-        <div>
-            @RenderBody()
-            <footer class="footer navbar-fixed-bottom">
-                <p>&copy; 2017 - @DateTime.Now.Year - ASP.NET Application, created with <a href="https://getbootstrap.com/">Bootstrap</a>, powered by <a href="https://www.microsoft.com/cs-cz/download/details.aspx?id=34679">Internet Information Services (IIS)</a></p>
-            </footer>
+            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav navbar-right">
+
+                @if (User.Identity.Name != null && !User.Identity.Name.Equals(""))
+                {
+                    <li><a onclick="openNav()" href="#"><span class="glyphicon glyphicon-user"></span> User: <b>@User.Identity.Name</b></a></li>
+                    <li><a href='@Url.Action("Logout", "Home")' onclick="@Url.Action("Logout", "Home")"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                }
+                else
+                {
+                    <li><a href='@Url.Action("Index", "Login")'><span class="glyphicon glyphicon-log-in"></span> <b>Log In</b></a></li>
+                }
+            </ul>
         </div>
-        @RenderSection("scripts", required: false)
-    </main>
+    </nav>
+    <div>
+        @RenderBody()
+        <footer class="footer navbar-fixed-bottom">
+            <p>&copy; 2017 - @DateTime.Now.Year - ASP.NET Application, created with <a href="https://getbootstrap.com/">Bootstrap</a>, powered by <a href="https://www.microsoft.com/cs-cz/download/details.aspx?id=34679">Internet Information Services (IIS)</a></p>
+        </footer>
+    </div>
+    @RenderSection("scripts", required: false)
+</main>
 
 @if (User.Identity.Name != null && !User.Identity.Name.Equals(""))
 {
@@ -70,8 +70,10 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="overlay-content">
             <a href="@Url.Action("Index", "AllUsers")">All users</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
+            <a href="@Url.Action("Index", "ComputerType")">Computer types</a>
+            <a href="#">Computer parameters</a>
+            <a href="#">Operation systems</a>
+            <a href="#">Access control</a>
             <a href="#">Contact</a>
         </div>
     </div>

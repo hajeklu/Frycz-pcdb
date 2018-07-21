@@ -27,27 +27,66 @@
             @Html.DisplayFor(model => model.lastname)
         </dd>
         <hr />
-        
+
         <dt>
-            User`s computers: 
+            User`s computers:
         </dt>
         <dd>
             <span class="glyphicon glyphicon-arrow-down"></span>
         </dd>
-        
+
         @foreach (computer computer in @Model.computers)
         {
             <dt>
-                Computer name: 
+                Computer name:
             </dt>
 
             <dd>
                 <a href="@Url.Action("Index", "ComputerDetail", computer)"><span class="glyphicon glyphicon-edit">@computer.name</span></a>
             </dd>
         }
+
+        <!-- Modal for delete-->
+        <div id="modalDel" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete computer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Really you wanna permanently delete computer <b>@Model.fullname</b> ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "UserDetail", Model)'">Delete</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
     </dl>
+@if (User.Identity.Name != null && !User.Identity.Name.Equals(""))
+{
+    <button type="button" onclick="location.href = '@Url.Action("Index", "EditUser", Model)'" class="btn btn-warning">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+    </button>
+    <button type="button" data-toggle="modal" data-target="#modalDel" class="btn btn-danger">
+        <span class="glyphicon glyphicon-remove"></span> Delete
+    </button>
+    <div>
+        
+
+        <button type="button" onclick="location.href = '@Url.Action("Index", "AllUsers")'" class="btn btn-link">
+            <span class="glyphicon glyphicon-backward"></span> Back to list
+        </button>
+
+    </div>
+}
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.iduser }) |
-    @Html.ActionLink("Back to List", "Index", "AllUsers")
-</p>

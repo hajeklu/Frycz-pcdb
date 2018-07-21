@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Frycz_pcdb.Models
 {
-    public class Validator
+    public static class Validator
     {
         public static bool validComputerName(string name)
         {
@@ -36,6 +36,29 @@ namespace Frycz_pcdb.Models
             int count = entities.computers.Count(e => e.name.Equals(computer));
 
             return count > 0;
+        }
+
+        public static bool checkExistUser(user user)
+        {
+            return checkExistUser(user.firstname, user.lastname);
+        }
+
+        public static bool checkExistUser(string firstname, string lastname)
+        {
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                int count = entities.users.Count(e => e.lastname.Equals(lastname) && e.firstname.Equals(firstname));
+                return count > 0;
+            }
+        }
+
+        public static bool validUser(user userIn)
+        {
+            if (userIn == null)
+                return false;
+            if (userIn.firstname == null || userIn.lastname == null)
+                return false;
+            return userIn.lastname.Length > 3 && userIn.firstname.Length > 3;
         }
 
         public static user findUser(String userInput)
@@ -75,5 +98,26 @@ namespace Frycz_pcdb.Models
                     }
                 }
             }
+
+
+        public static bool validType(computer_type computerType)
+        {
+
+            if (computerType == null || computerType.name == null || computerType.name.Equals(String.Empty))
+            {
+                return false;
+            }
+
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                int count = entities.computer_type.Count(t => t.name.Equals(computerType.name));
+                if (count > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
+    }
 }

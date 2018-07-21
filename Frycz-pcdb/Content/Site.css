@@ -358,3 +358,24 @@ body {
         right: 35px;
     }
 }
+
+
+#note {
+    position: absolute;
+    z-index: 999;
+    top: 5%;
+    left: 0;
+    right: 0;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    text-align: center;
+    line-height: 2.5;
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 5px black;
+    -moz-box-shadow: 0 0 5px black;
+    box-shadow: 0 0 5px black;
+    font-size: 15px;
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+}

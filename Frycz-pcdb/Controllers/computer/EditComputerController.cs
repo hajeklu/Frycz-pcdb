@@ -138,10 +138,10 @@ namespace Frycz_pcdb.Controllers
             List<string> result = new List<string>();
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
-                List<user> usereList = entities.users
+                List<Frycz_pcdb.user> usereList = entities.users
                     .Where(x => x.lastname.Contains(search) || x.firstname.Contains(search)).ToList();
 
-                foreach (user user in usereList)
+                foreach (Frycz_pcdb.user user in usereList)
                 {
 
                     result.Add(user.lastname + " " + user.firstname);
@@ -152,6 +152,29 @@ namespace Frycz_pcdb.Controllers
 
             return new JsonResult {Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
+
+
+        public String ajaxUser(string name)
+        {
+            Frycz_pcdb.user user = UserManager.tryAddUser(name);
+
+            if (user == null)
+                return null;
+            if (Validator.checkExistUser(user))
+            {
+                return null;
+            }
+
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                entities.users.Add(user);
+                entities.SaveChanges();
+            }
+
+            return "{\"msg\":\"success\"}";
+        }
+
+
 
         [Authorize]
         public ActionResult Save(computer computerIn, string userInput, Nullable<int> idcomputer_parameters,
@@ -183,7 +206,7 @@ namespace Frycz_pcdb.Controllers
                 
                 try
                 {
-                    user u = Validator.findUser(userInput);
+                    Frycz_pcdb.user u = Validator.findUser(userInput);
                     comp.iduser = u.iduser;
 
                 }

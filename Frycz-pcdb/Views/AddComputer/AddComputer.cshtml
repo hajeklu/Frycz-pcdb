@@ -6,6 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<div id="note" style="display: none" class="alert alert-success">
+    <strong>Success!</strong> User has been add to database.
+</div>
+
 <h2>Add Computer</h2>
 
 @using (Html.BeginForm("save", "AddComputer"))
@@ -34,7 +39,7 @@
             <div class="col-md-10">
                 <div>
                     <input id="userInput" name="userInput" type="text" class="form-control userInput">
-                    <button type="button" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                    <button type="button" onclick="ajaxAddUser()" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 </div>
                 @Html.ValidationMessage("userNotFound", new { @class = "text-danger" })
             </div>
@@ -148,6 +153,37 @@
 
 
 <script type="text/javascript">
+
+
+    
+    function ajaxAddUser() {
+
+        
+        var value = {
+            name: $('#userInput').
+                val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ajaxUser", "EditComputer")',
+            data: value,
+            dataType: 'json',
+
+            success: function() {
+                $("#note").show();
+                setTimeout(function() { $("#note").hide(); }, 2000);
+            },
+            error: function() {
+                window.location.href = "@Url.Action("Index","AddUser")";
+            }
+        });
+    }
+
+
+
+
+
 
     $("#userInput").autocomplete({
         source: function (request, response) {
