@@ -18,8 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" }, @Value = "" })
                 @Html.ValidationMessage("exist", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,7 +32,7 @@
 }
 
 <div>
-    <button type="button" onclick="location.href = '@Url.Action("Index", "ComputerType")'" class="btn btn-link">
-        <span class="glyphicon glyphicon-backward"></span> Back to list
+    <button type="button" onclick="window.history.back();" class="btn btn-link">
+        <span class="glyphicon glyphicon-backward"></span> Back
     </button>
 </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Web;
 
 namespace Frycz_pcdb.Models
@@ -56,9 +57,16 @@ namespace Frycz_pcdb.Models
         {
             if (userIn == null)
                 return false;
-            if (userIn.firstname == null || userIn.lastname == null)
+            return validUser(userIn.firstname, userIn.lastname);
+        }
+
+        public static bool validUser(string firstname, string lastname)
+        {
+            if (firstname == null || lastname == null)
                 return false;
-            return userIn.lastname.Length > 3 && userIn.firstname.Length > 3;
+            if (firstname.Contains(" ") || lastname.Contains(" "))
+                return false;
+            return lastname.Length >= 3 && firstname.Length >= 3;
         }
 
         public static user findUser(String userInput)

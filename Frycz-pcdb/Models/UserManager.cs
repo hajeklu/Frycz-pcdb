@@ -8,7 +8,7 @@ namespace Frycz_pcdb.Models
     public static class UserManager
     {
 
-        public static user tryAddUser(string name)
+        public static user tryCreateUser(string name)
         {
             if (name == null)
                 return null;

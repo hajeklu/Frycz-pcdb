@@ -45,5 +45,27 @@ namespace Frycz_pcdb.Controllers.user
 
             return View("AddUser", userIn);
         }
+
+        public string addJax(string firstname, string lastname)
+        {
+            if (!Validator.validUser(firstname, lastname))
+            {
+                return null;
+            }
+
+            if (Validator.checkExistUser(firstname, lastname))
+            {
+                return null;
+            }
+            Frycz_pcdb.user u = new Frycz_pcdb.user();
+            u.lastname = lastname;
+            u.firstname = firstname;
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                entities.users.Add(u);
+                entities.SaveChanges();
+                return "{\"msg\":\"success\"}";
+            }
+        }
     }
 }

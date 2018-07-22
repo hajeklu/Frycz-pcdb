@@ -10,7 +10,7 @@
 }
 
 <div id="note" style="display: none" class="alert alert-success">
-    <strong>Success!</strong> User has been add to database.
+    <strong>Success!</strong> Data has been add to database.
 </div>
 
 <h2>Edit computer</h2>
@@ -40,7 +40,7 @@
             <div class="col-md-10">
                 <div>
                     <input id="userInput" name="userInput" value="@Model.user.fullname" type="text" class="form-control userInput">
-                    <button type="button" onclick="ajaxAddUser()" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                    <button type="button" data-toggle="modal" data-target="#userAdd" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 </div>
                 @Html.ValidationMessage("userNotFound", new { @class = "text-danger" })
             </div>
@@ -97,7 +97,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.guarantee, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.guarantee, new { htmlAttributes = new {@class = "form-control date-picker", autocomplete = "off" } })
+                @Html.EditorFor(model => model.guarantee, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.guarantee, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -124,7 +124,7 @@
             @Html.LabelFor(model => model.idcomputer_brand, "Computer type: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idcomputerType", ViewBag.type as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
-                <button type="button" id="userInputButton" onclick="location.href = '@Url.Action("AddComputerType", "ComputerType")'" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                <button type="button" id="userInputButton" data-toggle="modal" data-target="#type" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 @Html.ValidationMessageFor(model => model.idcomputer_brand, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -174,7 +174,7 @@
         </div>
     </div>
 
-   
+
 }
 <div>
     <p>
@@ -187,6 +187,61 @@
 </div>
 
 
+<!-- Computer type modal -->
+<div id="type" class="modal fade modalMargin" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add computer type</h4>
+            </div>
+            <div class="modal-body">
+                <p>Name of computer type:  <input id="addTypeInput" class="bottomBorder" /></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addType()">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- User modal -->
+<div id="userAdd" class="modal fade modalMargin" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add user</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Firstname: </label>
+                        <input type="text" class="form-control" id="firstnameAjax" aria-describedby="emailHelp" placeholder="Firstname">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Lastname: </label>
+                        <input type="text" class="form-control" id="lastnameAjax" placeholder="Lastname">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addUser()">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
 
 <script type="text/javascript">
 
@@ -194,7 +249,7 @@
 
     function ajaxAddUser() {
 
-        
+
         var value = {
             name: $('#userInput').
         val()

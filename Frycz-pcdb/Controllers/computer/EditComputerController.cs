@@ -156,7 +156,7 @@ namespace Frycz_pcdb.Controllers
 
         public String ajaxUser(string name)
         {
-            Frycz_pcdb.user user = UserManager.tryAddUser(name);
+            Frycz_pcdb.user user = UserManager.tryCreateUser(name);
 
             if (user == null)
                 return null;

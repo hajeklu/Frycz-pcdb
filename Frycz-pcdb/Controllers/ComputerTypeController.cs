@@ -59,13 +59,14 @@ namespace Frycz_pcdb.Controllers
             }
         }
 
-        public ActionResult AddComputerType()
+        public ActionResult AddComputerType(computer computer)
         {
             return View("AddComputerType");
         }
 
         public ActionResult SaveAdd(computer_type computerType)
         {
+
 
             if (!Validator.validType(computerType))
             {
@@ -80,6 +81,28 @@ namespace Frycz_pcdb.Controllers
                 return RedirectToAction("Index", "ComputerType");
 
             }
+        }
+
+        public string addJax(string name)
+        {
+            computer_type computerType = new computer_type();
+
+            computerType.name = name;
+
+            if (!Validator.validType(computerType))
+            {
+                ModelState.AddModelError("exist", "Computer type is invalid or in use.");
+                return null;
+            }
+
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                entities.computer_type.Add(computerType);
+                entities.SaveChanges();
+
+            }
+
+            return "{\"msg\":\"success\"}";
         }
     }
 }

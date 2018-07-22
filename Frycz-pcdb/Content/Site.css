@@ -379,3 +379,19 @@ body {
     padding: 0px;
     margin: 0px;
 }
+
+/*---------------- modal margin ---------------------*/
+
+.modalMargin {
+    margin-top: 15%;
+}
+
+
+.bottomBorder {
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: #c0c0c0;
+}
+.bottomBorder:focus {
+    border-color: black;
+}
