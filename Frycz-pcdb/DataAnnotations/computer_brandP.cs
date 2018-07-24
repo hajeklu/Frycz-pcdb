@@ -22,11 +22,14 @@ namespace Frycz_pcdb
 
     public partial class computer_brand
     {
+
+        private string _modelAndMaker;
         [Display(Name = "Computer model: ")]
         public string modelAndMaker
         {
             get { return model + " " + maker; }
-            set { modelAndMaker = value; }
+            set
+            {_modelAndMaker = value;}
         }
     }
 }

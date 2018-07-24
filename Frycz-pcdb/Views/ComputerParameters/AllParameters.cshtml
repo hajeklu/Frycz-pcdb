@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Frycz_pcdb.computer_parameters>
+
+@{
+    ViewBag.Title = "AllParameters";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Parameters</h2>
+
+<p>
+    <button type="button" id="addButton" onclick="location.href = '@Url.Action("AddComputerParameters", "ComputerParameters")'" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>    Add computer parameters</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.processor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ram)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hdd)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.processor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ram) <small>GB</small>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hdd) <small>GB</small>
+            </td>
+            <td>
+                <button type="button" onclick="location.href = '@Url.Action("Edit", "ComputerParameters", item)'" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </button>
+                <button type="button" data-toggle="modal" data-target="#modalDel" onclick="@(ViewBag.nam = item)" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- Modal for delete-->
+<div id="modalDel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete computer parameters</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>Warning! </strong> This information will be lost in all computers.</p>
+                <p>Really you wanna permanently delete computer parameters: <b>@ViewBag.nam.processor @ViewBag.nam.ram GB @ViewBag.nam.hdd GB </b> ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick= "location.href='@Url.Action("Delete", "ComputerParameters", ViewBag.nam)'">Delete</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <button type="button" onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-link">
+        <span class="glyphicon glyphicon-backward"></span> Back
+    </button>
+</div>
+
+<div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+</div>

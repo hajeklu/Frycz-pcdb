@@ -127,5 +127,27 @@ namespace Frycz_pcdb.Models
 
             return true;
         }
+
+        public static bool validModel(computer_brand brand)
+        {
+            if (brand == null)
+                return false;
+            if (brand.model == null || brand.model.Equals(String.Empty) || brand.maker == null ||
+                brand.maker.Equals(String.Empty))
+            {
+                return false;
+            }
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                int count = entities.computer_brand.Count(t => t.maker.Equals(brand.maker) && t.model.Equals(brand.model));
+                if (count > 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+
     }
 }

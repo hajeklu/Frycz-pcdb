@@ -20,16 +20,17 @@
     <div class="form-horizontal">
         <h4>computer</h4>
         <hr />
-        <input name="count" value="@ViewBag.numberofadd" style="display: none"/>
-        @for(int i = 1; i <= ViewBag.numberofadd ; i++) { 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.name,"Computer name " + i + ": ", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="@i" name="@i" type="text" value="@ViewBag.first" class="form-control addInput">
-                @Html.ValidationMessage("eqcomp", new { @class = "text-danger" })
+        <input name="count" value="@ViewBag.numberofadd" style="display: none" />
+        @for (int i = 1; i <= ViewBag.numberofadd; i++)
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.name, "Computer name " + i + ": ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="@i" name="@i" type="text" value="@ViewBag.first" class="form-control addInput">
+                    @Html.ValidationMessage("eqcomp", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
         }
 
         <hr />
@@ -39,35 +40,36 @@
             <div class="col-md-10">
                 <div>
                     <input id="userInput" name="userInput" type="text" class="form-control userInput">
-                    <button type="button" onclick="ajaxAddUser()" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                    <button type="button" data-toggle="modal" data-target="#userAdd" id="userInputButton" class="userInputButton"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 </div>
                 @Html.ValidationMessage("userNotFound", new { @class = "text-danger" })
             </div>
         </div>
-        @if(ViewBag.numberofadd == 1) { 
-        <div class="form-group">
-            @Html.LabelFor(model => model.mac_address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.mac_address, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mac_address, "", new { @class = "text-danger" })
+        @if (ViewBag.numberofadd == 1)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.mac_address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.mac_address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.mac_address, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.serial_number, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.serial_number, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.serial_number, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.serial_number, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.serial_number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.serial_number, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.inventory_number, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.inventory_number, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.inventory_number, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.inventory_number, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.inventory_number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.inventory_number, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
         }
 
         <div class="form-group">
@@ -90,7 +92,7 @@
             @Html.LabelFor(model => model.idos, "OS: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idos", ViewBag.os as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
-                <button type="button" id="userInputButton" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                <button type="button" id="userInputButton" data-toggle="modal" data-target="#os" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 @Html.ValidationMessageFor(model => model.idos, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -117,7 +119,7 @@
             @Html.LabelFor(model => model.idcomputer_parameters, "Computer parameters: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idcomputer_parameters", ViewBag.parameters as IEnumerable<System.Web.Mvc.SelectListItem>, htmlAttributes: new { @class = "form-control userInput" })
-                <button type="submit" id="userInputButton" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
+                <button type="button" id="userInputButton" data-toggle="modal" data-target="#param" class="userInputButton btn btn-primary"><span class="glyphicon glyphicon-plus"></span><i class="fa fa-search"></i></button>
                 @Html.ValidationMessageFor(model => model.idcomputer_parameters, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -141,7 +143,7 @@
         </div>
     </div>
 
-    }
+}
 
 
 <div>
@@ -162,7 +164,7 @@
                 <h4 class="modal-title">Add computer type</h4>
             </div>
             <div class="modal-body">
-                <p>Name of computer type:  <input id="addTypeInput" class="bottomBorder"/></p>
+                <p>Name of computer type:  <input id="addTypeInput" class="bottomBorder" /></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -174,36 +176,108 @@
 </div>
 
 
+<!-- User modal -->
+<div id="userAdd" class="modal fade modalMargin" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add user</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Firstname: </label>
+                        <input type="text" class="form-control" id="firstnameAjax" aria-describedby="emailHelp" placeholder="Firstname">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Lastname: </label>
+                        <input type="text" class="form-control" id="lastnameAjax" placeholder="Lastname">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addUser()">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- Parameters modal -->
+<div id="param" class="modal fade modalMargin" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add computer parameters</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Processor: </label>
+                        <input type="text" class="form-control" id="processor" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">RAM: </label>
+                        <input type="number" class="form-control" id="ram" aria-describedby="emailHelp" placeholder="GB">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">HDD: </label>
+                        <input type="number" class="form-control" id="hdd" placeholder="GB">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addParameters()">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- OS modal -->
+<div id="os" class="modal fade modalMargin" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add operation system</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name: </label>
+                        <input type="text" class="form-control" id="OSName" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Version: </label>
+                        <input type="number" class="form-control" id="OSVersion" aria-describedby="emailHelp">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="addOS()">Create</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <script type="text/javascript">
-
-    function ajaxAddUser() {
-
-        
-        var value = {
-            name: $('#userInput').
-                val()
-        };
-
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("ajaxUser", "EditComputer")',
-            data: value,
-            dataType: 'json',
-
-            success: function() {
-                $("#note").show();
-                setTimeout(function() { $("#note").hide(); }, 2000);
-            },
-            error: function() {
-                window.location.href = "@Url.Action("Index","AddUser")";
-            }
-        });
-    }
-
-
-
-
-
 
     $("#userInput").autocomplete({
         source: function (request, response) {

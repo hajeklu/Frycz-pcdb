@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Frycz_pcdb.computer_brand>
+
+@{
+    ViewBag.Title = "AllModels";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All models</h2>
+
+<p>
+    <button type="button" id="addButton" onclick="location.href = '@Url.Action("AddModel", "ComputerModel", Model)'" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>    Add model</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.maker)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.model)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.maker)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.model)
+            </td>
+            <td>
+                <button type="button" onclick="location.href = '@Url.Action("EditModel", "ComputerModel", item)'" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </button>
+                <button type="button" data-toggle="modal" data-target="#modalDel" onclick="@(ViewBag.nam = item)" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- Modal for delete-->
+<div id="modalDel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete computer model</h4>
+            </div>
+            <div class="modal-body">
+                <p><strong>Warning! </strong> This information will be lost in all computers.</p>
+                <p>Really you wanna permanently delete computer model <b>@ViewBag.nam.maker @ViewBag.nam.model</b> ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick="location.href = '@Url.Action("Delete", "ComputerModel", ViewBag.nam)'">Delete</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+</div>

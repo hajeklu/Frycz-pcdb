@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EditUser</h2>
+<h2>Edit user</h2>
 
 @using (Html.BeginForm("Save", "EditUser"))
 {
@@ -43,6 +43,8 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        <button type="button" onclick="window.history.back();" class="btn btn-link">
+            <span class="glyphicon glyphicon-backward"></span> Back
+        </button>
+    </div>

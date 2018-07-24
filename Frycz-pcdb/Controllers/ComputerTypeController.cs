@@ -91,7 +91,6 @@ namespace Frycz_pcdb.Controllers
 
             if (!Validator.validType(computerType))
             {
-                ModelState.AddModelError("exist", "Computer type is invalid or in use.");
                 return null;
             }
 

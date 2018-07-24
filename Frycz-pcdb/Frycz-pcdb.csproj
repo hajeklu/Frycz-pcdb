@@ -183,6 +183,9 @@
     <Compile Include="computer_brand.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ComputerModelController.cs" />
+    <Compile Include="Controllers\ComputerOSController.cs" />
+    <Compile Include="Controllers\ComputerParametersController.cs" />
     <Compile Include="Controllers\ComputerTypeController.cs" />
     <Compile Include="Controllers\computer\AddComputerController.cs" />
     <Compile Include="Controllers\user\AddUserController.cs" />
@@ -456,6 +459,15 @@
     <Content Include="Views\ComputerType\AllComputerType.cshtml" />
     <Content Include="Views\ComputerType\EditComputerType.cshtml" />
     <Content Include="Views\ComputerType\AddComputerType.cshtml" />
+    <Content Include="Views\ComputerParameters\AllParameters.cshtml" />
+    <Content Include="Views\ComputerParameters\AddComputerParameters.cshtml" />
+    <Content Include="Views\ComputerParameters\EditParameters.cshtml" />
+    <Content Include="Views\ComputerOS\AllOS.cshtml" />
+    <Content Include="Views\ComputerOS\EditOS.cshtml" />
+    <Content Include="Views\ComputerOS\AddOS.cshtml" />
+    <Content Include="Views\ComputerModel\AllModels.cshtml" />
+    <Content Include="Views\ComputerModel\AddModel.cshtml" />
+    <Content Include="Views\ComputerModel\EditModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
