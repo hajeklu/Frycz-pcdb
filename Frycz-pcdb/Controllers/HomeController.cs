@@ -21,7 +21,7 @@ namespace Frycz_pcdb.Controllers
         public ActionResult Search(string searchText)
         {
             
-            if (searchText.Length < 3)
+            if (searchText.Length < 2)
                 return View("ListComputers", new List<computer>());
 
 

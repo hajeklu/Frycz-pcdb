@@ -40,6 +40,7 @@ namespace Frycz_pcdb.Controllers
                         Frycz_pcdb.user user = entities.users.FirstOrDefault(u => u.iduser == userIn.iduser);
                         user.lastname = userIn.lastname;
                         user.firstname = userIn.firstname;
+                        Logger.logUser(user, "Edit", User);
                         entities.SaveChanges();
                         return RedirectToAction("Index", "UserDetail", user);
                     }

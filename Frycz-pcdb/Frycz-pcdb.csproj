@@ -56,6 +56,7 @@
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySql.Data, Version=6.10.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.10.7\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -183,11 +184,13 @@
     <Compile Include="computer_brand.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\ComputerModelController.cs" />
     <Compile Include="Controllers\ComputerOSController.cs" />
     <Compile Include="Controllers\ComputerParametersController.cs" />
     <Compile Include="Controllers\ComputerTypeController.cs" />
     <Compile Include="Controllers\computer\AddComputerController.cs" />
+    <Compile Include="Controllers\LoggingController.cs" />
     <Compile Include="Controllers\user\AddUserController.cs" />
     <Compile Include="Controllers\user\AllUsersController.cs" />
     <Compile Include="Controllers\user\EditUserController.cs" />
@@ -208,7 +211,9 @@
     <Compile Include="DataAnnotations\computer_brandP.cs" />
     <Compile Include="DataAnnotations\computer_parametersP.cs" />
     <Compile Include="DataAnnotations\computer_typeP.cs" />
+    <Compile Include="DataAnnotations\loggingP.cs" />
     <Compile Include="DataAnnotations\oP.cs" />
+    <Compile Include="DataAnnotations\registered_userP.cs" />
     <Compile Include="DataAnnotations\userP.cs" />
     <Compile Include="DBModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -236,7 +241,7 @@
     </Compile>
     <Compile Include="Models\EncryptHelper.cs" />
     <Compile Include="Models\Frycz_pcdb_MemberShipProvider.cs" />
-    <Compile Include="Models\UserManager.cs" />
+    <Compile Include="Models\Logger.cs" />
     <Compile Include="Models\Validator.cs" />
     <Compile Include="o.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
@@ -468,6 +473,9 @@
     <Content Include="Views\ComputerModel\AllModels.cshtml" />
     <Content Include="Views\ComputerModel\AddModel.cshtml" />
     <Content Include="Views\ComputerModel\EditModel.cshtml" />
+    <Content Include="Views\Logging\LoggingAll.cshtml" />
+    <Content Include="Views\Access\AllRegisteredUser.cshtml" />
+    <Content Include="Views\Access\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

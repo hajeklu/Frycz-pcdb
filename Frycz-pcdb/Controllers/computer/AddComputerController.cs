@@ -82,7 +82,7 @@ namespace Frycz_pcdb.Controllers
                         Frycz_pcdb.user user = Validator.findUser(userInput);
                         comp.iduser = user.iduser;
                     }
-                    catch (Exception e)
+                    catch
                     {
 
                         ModelState.AddModelError("userNotFound", "User not found. ");
@@ -123,9 +123,8 @@ namespace Frycz_pcdb.Controllers
                     comp.guarantee = computerIn.guarantee;
                     comp.create_time = DateTime.Now;
                     comp.last_update_time = DateTime.Now;
-
                     entities.computers.Add(comp);
-
+                    Logger.logComputer(comp,"Add", User, entities);
                 }
                 entities.SaveChanges();
             }
@@ -262,27 +261,6 @@ namespace Frycz_pcdb.Controllers
 
             }
             return new JsonResult { Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-        }
-
-
-        public String ajaxUser(string name)
-        {
-            Frycz_pcdb.user user = UserManager.tryCreateUser(name);
-
-            if (user == null)
-                return null;
-            if (Validator.checkExistUser(user))
-            {
-                return null;
-            }
-
-            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
-            {
-                entities.users.Add(user);
-                entities.SaveChanges();
-            }
-
-            return "{\"msg\":\"success\"}";
         }
     }
 }

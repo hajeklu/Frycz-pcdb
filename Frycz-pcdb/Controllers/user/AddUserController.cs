@@ -38,6 +38,7 @@ namespace Frycz_pcdb.Controllers.user
                 using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
                 {
                     entities.users.Add(userIn);
+                    Logger.logUser(userIn, "Add", User);
                     entities.SaveChanges();
                     return RedirectToAction("Index", "AllUsers");
                 }
@@ -63,6 +64,7 @@ namespace Frycz_pcdb.Controllers.user
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 entities.users.Add(u);
+                Logger.logUser(u,"Add",User);
                 entities.SaveChanges();
                 return "{\"msg\":\"success\"}";
             }

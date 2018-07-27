@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Frycz_pcdb.Models;
 
 namespace Frycz_pcdb.Controllers
 {
@@ -33,6 +34,7 @@ namespace Frycz_pcdb.Controllers
                 var comp = entities.computers.FirstOrDefault(c => c.idcomputer == computerIn.idcomputer);
                 comp.discardedDate = DateTime.Now;
                 entities.SaveChanges();
+                Logger.logComputer(comp,"Discard",User);
                 return RedirectToAction("Index", "ComputerDetail", comp);
             }
         }
@@ -44,6 +46,7 @@ namespace Frycz_pcdb.Controllers
                 var comp = entities.computers.FirstOrDefault(c => c.idcomputer == computerIn.idcomputer);
                 entities.computers.Remove(comp);
                 entities.SaveChanges();
+                Logger.logComputer(comp, "Delete", User);
                 return RedirectToAction("Index", "AllComputer", comp);
             }
         }

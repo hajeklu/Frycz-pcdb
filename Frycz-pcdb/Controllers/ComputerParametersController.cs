@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Frycz_pcdb.Models;
 using Microsoft.Ajax.Utilities;
 using WebGrease.Configuration;
 
@@ -22,6 +23,7 @@ namespace Frycz_pcdb.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult AddComputerParameters()
         {
             return View("AddComputerParameters");
@@ -29,19 +31,24 @@ namespace Frycz_pcdb.Controllers
 
         public ActionResult SaveAdd(computer_parameters parameters)
         {
-            if (parameters == null)
+            if (!Validator.validParameters(parameters))
             {
-                return View("AddComputerParameters");
+                ModelState.AddModelError("exist", "Computer parameters is invalid or in use.");
+                return View("AddComputerParameters", parameters);
             }
+
 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 entities.computer_parameters.Add(parameters);
+
+                Logger.logParameters(parameters, "Add", User);
                 entities.SaveChanges();
                 return RedirectToAction("Index", "ComputerParameters");
             }
         }
 
+        [Authorize]
         public ActionResult Delete(computer_parameters parameters)
         {
             if (parameters == null)
@@ -54,16 +61,18 @@ namespace Frycz_pcdb.Controllers
                 computer_parameters par = entities.computer_parameters.FirstOrDefault(p =>
                     p.idcomputer_parameters == parameters.idcomputer_parameters);
                 entities.computer_parameters.Remove(par);
+                Logger.logParameters(par, "Delete", User);
                 entities.SaveChanges();
                 return RedirectToAction("Index", "ComputerParameters");
             }
         }
 
+        [Authorize]
         public ActionResult Edit(computer_parameters parameters)
         {
             if (parameters == null)
             {
-                return null;
+                return RedirectToAction("Index", "ComputerParameters");
             }
 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
@@ -77,9 +86,10 @@ namespace Frycz_pcdb.Controllers
 
         public ActionResult SaveEdit(computer_parameters parameters)
         {
-            if (parameters == null)
+            if (!Validator.validParameters(parameters))
             {
-                return null;
+                ModelState.AddModelError("exist", "Computer parameters is invalid or in use.");
+                return View("EditParameters", parameters);
             }
 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
@@ -107,15 +117,22 @@ namespace Frycz_pcdb.Controllers
             {
                 return null;
             }
-
-            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            computer_parameters computerParameters = new computer_parameters();
+            computerParameters.hdd = hddN;
+            computerParameters.ram = ramN;
+            computerParameters.processor = processor;
+            if (!Validator.validParameters(computerParameters))
             {
-                computer_parameters computerParameters = new computer_parameters();
-                computerParameters.hdd = hddN;
-                computerParameters.ram = ramN;
-                computerParameters.processor = processor;
+                return null;
+            }
+
+
+                using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
 
                 entities.computer_parameters.Add(computerParameters);
+
+                Logger.logParameters(computerParameters, "Add", User);
                 entities.SaveChanges();
 
             }

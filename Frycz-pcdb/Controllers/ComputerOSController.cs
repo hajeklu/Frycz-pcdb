@@ -4,6 +4,7 @@ using System.Linq;
 using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
+using Frycz_pcdb.Models;
 
 namespace Frycz_pcdb.Controllers
 {
@@ -25,7 +26,7 @@ namespace Frycz_pcdb.Controllers
         {
             if (oIn == null)
             {
-                return null;
+                return RedirectToAction("Index", "ComputerOS");
             }
 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
@@ -37,9 +38,10 @@ namespace Frycz_pcdb.Controllers
 
         public ActionResult SaveEdit(o oIn)
         {
-            if (oIn == null)
+            if (!Validator.validOS(oIn))
             {
-                return null;
+                ModelState.AddModelError("exist", "Operation system is invalid or in use.");
+                return View("EditOS", oIn);
             }
 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
@@ -61,9 +63,10 @@ namespace Frycz_pcdb.Controllers
 
         public ActionResult SaceAdd(o oIn)
         {
-            if (oIn == null)
+            if (!Validator.validOS(oIn))
             {
-                return null;
+                ModelState.AddModelError("exist", "Operation system is invalid or in use.");
+                return View("AddOS", oIn);
             }
 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
@@ -79,7 +82,7 @@ namespace Frycz_pcdb.Controllers
         {
             if (oIn == null)
             {
-                return null;
+                return RedirectToAction("Index", "ComputerOS");
             }
 
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())

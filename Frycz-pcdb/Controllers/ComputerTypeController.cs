@@ -41,6 +41,7 @@ namespace Frycz_pcdb.Controllers
                     entities.computer_type.FirstOrDefault(t => t.idcomputer_type == computerType.idcomputer_type);
 
                 type.name = computerType.name;
+                Logger.logComputerType(type,"Edit", User);
                 entities.SaveChanges();
                 return RedirectToAction("Index", "ComputerType");
             }
@@ -54,6 +55,7 @@ namespace Frycz_pcdb.Controllers
                     entities.computer_type.FirstOrDefault(t => t.idcomputer_type == computerType.idcomputer_type);
 
                 entities.computer_type.Remove(type);
+                Logger.logComputerType(type, "Delete", User);
                 entities.SaveChanges();
                 return RedirectToAction("Index", "ComputerType");
             }
@@ -77,6 +79,7 @@ namespace Frycz_pcdb.Controllers
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 entities.computer_type.Add(computerType);
+                Logger.logComputerType(computerType, "Add", User);
                 entities.SaveChanges();
                 return RedirectToAction("Index", "ComputerType");
 
@@ -97,6 +100,7 @@ namespace Frycz_pcdb.Controllers
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 entities.computer_type.Add(computerType);
+                Logger.logComputerType(computerType, "Edit", User);
                 entities.SaveChanges();
 
             }

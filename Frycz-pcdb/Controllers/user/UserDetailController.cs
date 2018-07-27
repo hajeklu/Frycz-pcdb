@@ -17,7 +17,7 @@ namespace Frycz_pcdb.Controllers
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 entities.Configuration.LazyLoadingEnabled = false;
-                if (user.iduser != null)
+                if (user != null)
                 {
                     userIn = entities.users.Include(e => e.computers).FirstOrDefault(e => e.iduser == user.iduser);
 
@@ -30,7 +30,7 @@ namespace Frycz_pcdb.Controllers
         [Authorize]
         public ActionResult Delete(Frycz_pcdb.user userIn)
         {
-            if (userIn != null && userIn.iduser != null)
+            if (userIn != null)
             {
                 using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
                 {

@@ -119,13 +119,8 @@ namespace Frycz_pcdb.Models
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 int count = entities.computer_type.Count(t => t.name.Equals(computerType.name));
-                if (count > 0)
-                {
-                    return false;
-                }
+                return count <= 0;
             }
-
-            return true;
         }
 
         public static bool validModel(computer_brand brand)
@@ -140,14 +135,40 @@ namespace Frycz_pcdb.Models
             using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
             {
                 int count = entities.computer_brand.Count(t => t.maker.Equals(brand.maker) && t.model.Equals(brand.model));
-                if (count > 0)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        
 
+                return count <= 0;
+            }
+        }
+
+        public static bool validOS(o oIn)
+        {
+            if (oIn == null)
+                return false;
+            if (oIn.name == null || oIn.name.Equals(String.Empty) || oIn.version == null ||
+                oIn.version.Equals(String.Empty))
+                return false;
+
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                int count = entities.os.Count(t => t.name.Equals(oIn.name) && t.version == oIn.version);
+                return count <= 0;
+
+            }
+        }
+
+        public static bool validParameters(computer_parameters parameters)
+        {
+            if (parameters == null)
+            {
+                return false;
+            }
+
+            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
+            {
+                int count = entities.computer_parameters.Count(e =>
+                    e.hdd == parameters.hdd && e.processor.Equals(parameters.processor) && e.ram == parameters.ram);
+                return count <= 0;
+            }
+        }
     }
 }

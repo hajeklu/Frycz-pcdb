@@ -154,28 +154,6 @@ namespace Frycz_pcdb.Controllers
         }
 
 
-        public String ajaxUser(string name)
-        {
-            Frycz_pcdb.user user = UserManager.tryCreateUser(name);
-
-            if (user == null)
-                return null;
-            if (Validator.checkExistUser(user))
-            {
-                return null;
-            }
-
-            using (frycz_pcdbEntities entities = new frycz_pcdbEntities())
-            {
-                entities.users.Add(user);
-                entities.SaveChanges();
-            }
-
-            return "{\"msg\":\"success\"}";
-        }
-
-
-
         [Authorize]
         public ActionResult Save(computer computerIn, string userInput, Nullable<int> idcomputer_parameters,
             Nullable<int> idcomputerBrand, Nullable<int> idcomputerType)
@@ -210,7 +188,7 @@ namespace Frycz_pcdb.Controllers
                     comp.iduser = u.iduser;
 
                 }
-                catch (Exception e)
+                catch
                 {
                     var co = entities.computers.Where(c => c.idcomputer == computerIn.idcomputer)
                         .Include(c => c.user).Include(c => c.computer_parameters).Include(c => c.o)
